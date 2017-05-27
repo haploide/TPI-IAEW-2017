@@ -144,7 +144,7 @@ namespace TuriCorAPI.Controllers
             if (disposing)
             {
                 _db.Dispose();
-            }
+            }frtggggggggggggggggggggggggggggggggggggggggggggggggggggg
             base.Dispose(disposing);
         }
     }
