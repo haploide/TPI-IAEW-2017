@@ -29,5 +29,28 @@ namespace TuriCorAPI.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        public IHttpActionResult Get(int id)
+        {
+            try
+            {
+                if (_db.Cliente == null || !_db.Cliente.Any())
+                {
+                    return NotFound();
+                }
+                Cliente cli = _db.Cliente.FirstOrDefault(p => p.Id == id);
+                if (cli == null)
+                {
+                    return NotFound();
+                }
+                return Ok(cli);
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
     }
 }
