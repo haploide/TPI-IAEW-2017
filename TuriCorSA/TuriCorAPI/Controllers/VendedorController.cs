@@ -9,8 +9,9 @@ using TuriCorAPI.Models;
 
 namespace TuriCorAPI.Controllers
 {
-    [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]  // permite sacar info fuera del servidor 
     public class VendedorController : ApiController
     {
+
     }
 }
