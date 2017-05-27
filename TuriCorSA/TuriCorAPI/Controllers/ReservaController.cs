@@ -12,5 +12,6 @@ namespace TuriCorAPI.Controllers
     [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]
     public class ReservaController : ApiController
     {
+        private TuricorEntities _db = new TuricorEntities();
     }
 }
