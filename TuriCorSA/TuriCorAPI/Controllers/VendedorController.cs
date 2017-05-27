@@ -13,5 +13,16 @@ namespace TuriCorAPI.Controllers
     public class VendedorController : ApiController
     {
         private TuricorEntities _db = new TuricorEntities();
+
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
