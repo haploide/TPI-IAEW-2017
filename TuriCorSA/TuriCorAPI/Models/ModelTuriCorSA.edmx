@@ -86,7 +86,6 @@
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NroDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Reserva" Relationship="Self.FK_Reserva_ToCliente" FromRole="Cliente" ToRole="Reserva" />
         </EntityType>
         <EntityType Name="Reserva">
           <Key>
@@ -111,7 +110,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Reserva" Relationship="Self.FK_Reserva_ToVendedor" FromRole="Vendedor" ToRole="Reserva" />
         </EntityType>
         <Association Name="FK_Reserva_ToCliente">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
