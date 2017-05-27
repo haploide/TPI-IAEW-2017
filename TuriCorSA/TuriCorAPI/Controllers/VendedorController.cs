@@ -12,6 +12,55 @@ namespace TuriCorAPI.Controllers
     [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]  // permite sacar info fuera del servidor 
     public class VendedorController : ApiController
     {
+        private TuricorEntities _db = new TuricorEntities();
+        public IHttpActionResult Get()
+        {
+            try
+            {
+                if (_db.Vendedor == null || !_db.Vendedor.Any())
+                {
+                    return NotFound();
+                }
+                return Ok(_db.Vendedor);
+            }
+            catch (Exception ex)
+            {
 
+                return InternalServerError(ex);
+            }
+        }
+
+        public IHttpActionResult Get(int id)
+        {
+            try
+            {
+                if (_db.Vendedor == null || !_db.Vendedor.Any())
+                {
+                    return NotFound();
+                }
+                Vendedor ven = _db.Vendedor.FirstOrDefault(p => p.Id == id);
+                if (ven == null)
+                {
+                    return NotFound();
+                }
+                return Ok(ven);
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
