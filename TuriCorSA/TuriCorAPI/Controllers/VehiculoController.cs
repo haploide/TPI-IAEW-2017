@@ -8,7 +8,7 @@ namespace TuriCorAPI.Controllers
     [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]
     public class VehiculoController : ApiController
     {
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(int Id, DateTime fechaHoraRetiro, DateTime fechaHoraDevolucion)
         {
             try
             {
@@ -16,9 +16,9 @@ namespace TuriCorAPI.Controllers
 
                 var vehiculos = cliente.ConsultarVehiculosDisponibles(new ServiceReferenceReservaVehiculos.ConsultarVehiculosRequest()
                 {
-                    IdCiudad = 2,
-                    FechaHoraRetiro = new DateTime(2017, 1, 1),
-                    FechaHoraDevolucion = new DateTime(2017, 3, 27)
+                    IdCiudad = Id,
+                    FechaHoraRetiro = fechaHoraRetiro,
+                    FechaHoraDevolucion = fechaHoraDevolucion
                 });
 
                 if (vehiculos == null)
