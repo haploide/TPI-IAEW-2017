@@ -54,6 +54,31 @@ namespace TuriCorAPI.Controllers
             }
         }
 
+        public IHttpActionResult Get(bool incluirCancel)
+        {
+            try
+            {
+                var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
+
+                var reservas = cliente.ConsultarReservas(new ServiceReferenceReservaVehiculos.ConsultarReservasRequest()
+                {
+                    IncluirCanceladas = incluirCancel
+
+                });
+
+                if (reservas == null)
+                {
+                    return NotFound();
+                }
+                return Ok(reservas);
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
         public IHttpActionResult Post([FromBody]Reserva res)
         {
             try
