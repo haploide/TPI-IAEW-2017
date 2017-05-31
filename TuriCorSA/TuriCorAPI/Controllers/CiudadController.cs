@@ -11,7 +11,7 @@ namespace TuriCorAPI.Controllers
     [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]
     public class CiudadController : ApiController
     {
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(int id)
         {
             try
             {
@@ -19,7 +19,7 @@ namespace TuriCorAPI.Controllers
 
                 var ciudades= cliente.ConsultarCiudades(new ServiceReferenceReservaVehiculos.ConsultarCiudadesRequest()
                 {
-                    IdPais = 1,
+                    IdPais = id,
                    
                 });
 
