@@ -11,7 +11,7 @@ namespace TuriCorAPI.Controllers
     [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]
     public class CiudadController : ApiController
     {
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get(int id) 
         {
             try
             {
