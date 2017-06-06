@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AuthorizationServer.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,6 +12,7 @@ namespace TuriCorAPI.Controllers
     [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]
     public class CiudadController : ApiController
     {
+        [Scope("read")]
         public IHttpActionResult Get(int id) 
         {
             try

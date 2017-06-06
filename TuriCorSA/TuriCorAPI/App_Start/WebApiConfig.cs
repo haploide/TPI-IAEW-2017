@@ -7,9 +7,9 @@ namespace TuriCorAPI
 {
     public static class WebApiConfig
     {
-        public static void Register(HttpConfiguration config)
+        public static HttpConfiguration Register()
         {
-            // Web API configuration and services
+            var config = new HttpConfiguration();
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -19,6 +19,8 @@ namespace TuriCorAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            return config;
         }
     }
 }
