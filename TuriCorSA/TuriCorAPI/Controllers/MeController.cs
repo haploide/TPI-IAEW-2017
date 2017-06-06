@@ -16,5 +16,11 @@ namespace TuriCorAPI.Controllers
         {
             return this.User.Identity.Name;
         }
+
+        [Scope("write")]
+        public string post()
+        {
+            return this.User.Identity.Name;
+        }
     }
 }
