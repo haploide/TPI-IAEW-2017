@@ -6,10 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using TuriCorAPI.Models;
-
+using AuthorizationServer.App_Start;
 namespace TuriCorAPI.Controllers
 {
-    [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]
+    // [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]
+    [Scope("read")]
     public class ReservaController : ApiController
     {
         private TuricorEntities _db = new TuricorEntities();

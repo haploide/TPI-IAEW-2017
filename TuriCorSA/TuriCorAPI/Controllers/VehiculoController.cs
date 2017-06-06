@@ -2,10 +2,11 @@
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Threading.Tasks;
-
+using AuthorizationServer.App_Start; 
 namespace TuriCorAPI.Controllers
 {
-    [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]
+    // [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]
+    [Scope("read")]
     public class VehiculoController : ApiController
     {
         public IHttpActionResult Get(int Id, DateTime fechaHoraRetiro, DateTime fechaHoraDevolucion)
