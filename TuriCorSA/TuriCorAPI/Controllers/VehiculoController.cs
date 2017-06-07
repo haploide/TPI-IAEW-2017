@@ -2,7 +2,10 @@
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Threading.Tasks;
-using AuthorizationServer.App_Start; 
+using AuthorizationServer.App_Start;
+using System.Collections.Generic;
+using TuriCorAPI.ServiceReferenceReservaVehiculos;
+
 namespace TuriCorAPI.Controllers
 {
      
@@ -12,6 +15,7 @@ namespace TuriCorAPI.Controllers
         //[Scope("read")]
         public IHttpActionResult Get(int Id, DateTime fechaHoraRetiro, DateTime fechaHoraDevolucion)
         {
+            List<VehiculoModel> listaVehiculos = new List<VehiculoModel>();
             try
             {
                 var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
@@ -27,7 +31,19 @@ namespace TuriCorAPI.Controllers
                 {
                     return NotFound();
                 }
-                return Ok(vehiculos);
+                foreach(VehiculoModel ve in vehiculos.VehiculosEncontrados )
+                {
+                    ve.PrecioPorDia = ve.PrecioPorDia * (decimal)1.20 ;
+                    if (ve.TieneAireAcon==true)
+                    {
+                        ve.TieneAireAcon = Convert.ToBoolean("SI");
+
+                    }
+
+                    listaVehiculos.Add(ve);
+                }
+
+                return Ok(listaVehiculos);
             }
             catch (Exception ex)
             {
