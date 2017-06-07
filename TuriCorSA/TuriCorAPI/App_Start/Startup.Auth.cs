@@ -1,6 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
 using Microsoft.Owin.Security.OAuth;
+using Microsoft.Owin.Cors;
 
 [assembly: OwinStartup(typeof(TuriCorAPI.Startup))]
 
@@ -10,6 +11,7 @@ namespace TuriCorAPI
     {
         public void ConfigureAuth(IAppBuilder app)
         {
+            //app.UseCors(CorsOptions.AllowAll);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
     }

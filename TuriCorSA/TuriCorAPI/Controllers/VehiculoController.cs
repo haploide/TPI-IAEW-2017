@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using AuthorizationServer.App_Start; 
 namespace TuriCorAPI.Controllers
 {
-     [EnableCors(origins: "http://localhost:8660", headers: "*", methods: "*")]
-    //[Scope("read")]
+     
+    
     public class VehiculoController : ApiController
     {
+        //[Scope("read")]
         public IHttpActionResult Get(int Id, DateTime fechaHoraRetiro, DateTime fechaHoraDevolucion)
         {
             try
