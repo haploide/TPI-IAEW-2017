@@ -1,10 +1,46 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
+﻿<div>
+    <div class="jumbotron">
+        <h1>{{ vehiculosList.title }}</h1>
+        <p class="lead">Listado de Vehiculos</p>
+        <!--<p><a href="#/newcliente" class="btn btn-primary">Nuevo Cliente</a></p>-->
+    </div>
+    <div>
+        <div data-ng-show="isBusy">PROCESANDO....</div>
+    </div>
+    <div class="well row">
+        <table class="table">
+            <tr>
+        
+                <th>Id</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>PrecioPorDia</th>
+                <th>Puntaje</th>
+                <th>TieneAireAcon</th>
+                <th>TieneDireccion</th>
+                <th>TipoCambio</th>
+                <th>VehiculoCiudadId</th>
+                <th>CantidadDisponible</th>
+                <th>CantidadPuertas</th>
+                <th>CiudadId</th>
+            </tr>
+            <tr data-ng-repeat="vehi in vehiculosList.vehiculo">
+                <th>{{vehi.Id }}</th>
+                <th>{{vehi.Marca }}</th>
+                <th>{{vehi.Modelo }}</th>
+                <th>{{vehi.PrecioPorDia }}</th>
+                <th>{{vehi.Puntaje }}</th>
+                <th>{{vehi.TieneAireAcon }}</th>
+                <th>{{vehi.TieneDireccion }}</th>
+                <th>{{vehi.TipoCambio }}</th>
+                <th>{{vehi.VehiculoCiudadId }}</th>
+                <th>{{vehi.CantidadDisponible }}</th>
+                <th>{{vehi.CantidadPuertas }}</th>
+                <th>{{vehi.CiudadId }}</th>
 
-</body>
-</html>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
