@@ -1,11 +1,20 @@
 ﻿var module = angular.module('app', ['ngRoute'])
     .config(function($routeProvider){
-        $routeProvider.when('/listarvehiculos', {
-            controller: 'vehiculosController as vehiculosList',
-            templateUrl: 'templates/VehiculosView.html'
+        $routeProvider.when("/", {
+            controller: "homeController as home",
+            templateUrl: "/templates/homeView.html"
+        }).when("/listarvehiculos", {
+                controller: "vehiculosController as vehiculosList",
+                templateUrl: "templates/VehiculosView.html"
 
-        })
-    }).controller('vehiculosController', function($http){
+        }).otherwise({
+            redirectTo: "/"
+        });
+    }).controller('homeController', function ($http) {
+        var homeController = this;
+        homeController.title = "Home";
+
+    }).controller('vehiculosController', function ($http) {
         var vehiculosController = this;
         vehiculosController.title = 'Consulta de Vehiculos Disponibles';
         vehiculosController.vehiculo = [];

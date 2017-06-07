@@ -6,6 +6,9 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+
 
 </head>
 <body>
@@ -29,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" data-ng-app="app">
         @RenderBody()
         <hr />
         <footer>
