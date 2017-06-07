@@ -10,7 +10,7 @@ using AuthorizationServer.App_Start;
 
 namespace TuriCorAPI.Controllers
 {
-    //  [EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]  // permite sacar info fuera del servidor 
+    [EnableCors(origins: "http://localhost:8660", headers: "*", methods: "*")]  // permite sacar info fuera del servidor 
     [Scope("read")]
     public class VendedorController : ApiController
     {

@@ -10,7 +10,7 @@ using AuthorizationServer.App_Start;
 
 namespace TuriCorAPI.Controllers
 {
-    //[EnableCors(origins: "http://localhost:2253", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:8660", headers: "*", methods: "*")]
     [Scope("read")]
     public class ClienteController : ApiController
     {

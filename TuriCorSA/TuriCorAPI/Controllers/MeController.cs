@@ -5,10 +5,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 
 namespace TuriCorAPI.Controllers
 {
+    [EnableCors(origins: "http://localhost:8660", headers: "*", methods: "*")]
     public class MeController : ApiController
     {
         [Scope("read")]
