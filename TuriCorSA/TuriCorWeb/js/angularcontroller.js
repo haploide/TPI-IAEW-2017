@@ -17,7 +17,7 @@
     }).controller('vehiculosController', function ($http) {
         var vehiculosController = this;
         vehiculosController.title = 'Consulta de Vehiculos Disponibles';
-        vehiculosController.vehiculo = [];
+        vehiculosController.vehiculos = [];
         vehiculosController.isBusy = true;
         $http({
             method: 'GET',
@@ -26,7 +26,7 @@
                 'Accept': "application/json"
             }
         }).then(function (response) {
-            angular.copy(response.data, vehiculosController.vehiculo);
+            angular.copy(response.data.VehiculosEncontrados, vehiculosController.vehiculos);
             vehiculosController.isBusy = false;
 
         }, function (response) {
