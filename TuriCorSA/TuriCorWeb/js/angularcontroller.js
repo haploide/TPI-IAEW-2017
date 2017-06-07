@@ -12,7 +12,7 @@
         });
     }).controller('homeController', function ($http) {
         var homeController = this;
-        homeController.title = "Home";
+        homeController.title = "TuriCor S.A.";
 
     }).controller('vehiculosController', function ($http) {
         var vehiculosController = this;
