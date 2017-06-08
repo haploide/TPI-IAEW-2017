@@ -1,0 +1,42 @@
+﻿<div class="jumbotron">
+    <h1>{{ registarReserva.title }}</h1>
+    <p class="lead">Registrar Reserva</p>
+    <button type="submit" class="btn btn-primary" ng-click="reservasList.buscarReservas()">Buscar</button>
+    <div class="form-group">
+        <label for="datepickerHasta">Codigo de reserva:</label>
+        <input type="text" required id="datepickerHasta" ng-model="fechaDesde" ng-minlength="10" placeholder="yyyy-mm-dd">
+
+    </div>
+</div>
+<div>
+    <div data-ng-show="isBusy">PROCESANDO....</div>
+</div>
+<div class="col-md-12 row">
+    <table class="table">
+        <tr>
+
+            <th ng-hide="true">Id</th>
+            <th>Codigo de Reserva</th>
+            <th>Fecha Reserva</th>
+            <th>Cliente</th>
+            <th>Vendedor</th>
+            <th ng-hide="true">Costo</th>
+            <th>Precio de Venta</th>
+            <th>Ciudad</th>
+            <th>Pais</th>
+
+        </tr>
+        <tr data-ng-repeat="res in reservasList.reservas | orderBy:'Id'">
+            <th ng-hide="true">{{res.Id }}</th>
+            <th>{{res.CodigoReserva }}</th>
+            <th>{{res.FechaReserva }}</th>
+            <th>{{res.Cliente.Nombre+' '+res.Cliente.Apellido }}</th>
+            <th>{{res.Vendedor.Nombre }}</th>
+            <th ng-hide="true">{{res.Costo }}</th>
+            <th>{{res.PrecioVenta }}</th>
+            <th>{{res.IdCiudad }}</th>
+            <th>{{res.IdPais }}</th>
+
+        </tr>
+    </table>
+</div>
