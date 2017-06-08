@@ -40,14 +40,20 @@ namespace TuriCorAPI.Controllers
                 var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
 
                 var pais = cliente.ConsultarPaises();
-                pais
+                foreach (var p in pais.Paises)
+                {
+                    if (p.Id==id)
+                    {
+                        return Ok(p);
+                    }
+                }
               
                 if (pais == null)
                 {
                     return NotFound();
                 }
                 
-                return Ok(pais);
+                return Ok();
             }
             catch (Exception ex)
             {
