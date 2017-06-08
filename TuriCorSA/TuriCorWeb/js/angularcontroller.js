@@ -49,7 +49,9 @@
                     } else {
                         this.TieneDireccion = 'No';
                     }
-                })
+                    this.CiudadId = $('#cmbCiudad option:selected').text();
+                });
+                
                 vehiculosController.isBusy = false;
 
             }, function (response) {
