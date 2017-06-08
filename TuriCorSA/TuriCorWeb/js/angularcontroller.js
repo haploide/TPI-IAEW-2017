@@ -112,6 +112,7 @@
         var reservasController = this;
         reservasController.title = 'Consulta de reservas realizadas';
         reservasController.reservas = [];
+        reservasController.paises = [];
 
         reservasController.buscarReservas = function () {
             reservasController.isBusy = true;
@@ -123,6 +124,30 @@
                 }
             }).then(function (response) {
                 angular.copy(response.data, reservasController.reservas);
+                reservasController.isBusy = true;
+        $http({
+            method: 'GET',
+         
+            url: 'http://localhost:2253/api/pais?id=1',
+            headers: {
+                'Accept': "application/json"
+            }
+        }).then(function (response) {
+            angular.copy(response.data.Paises, reservasController.paises);
+            alert(response.data.Paises);
+            $.each(reservasController.reservas, function () {
+                
+                this.IdPais = reservasController.paises.Nombre;
+                
+            }
+            )
+            reservasController.isBusy = false;
+
+        }, function (response) {
+            alert("Error");
+        }).then(function () {
+
+        });
                 reservasController.isBusy = false;
 
             }, function (response) {
