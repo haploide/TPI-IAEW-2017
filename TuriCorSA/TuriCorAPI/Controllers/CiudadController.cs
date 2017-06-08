@@ -60,7 +60,7 @@ namespace TuriCorAPI.Controllers
                         return Ok(c);
                     }
                 }
-                return Ok(c);
+                return Ok();
             }
             catch (Exception ex)
             {
