@@ -9,10 +9,9 @@ using System.Web.Http.Cors;
 
 namespace TuriCorAPI.Controllers
 {
-    [EnableCors(origins: "http://localhost:8660", headers: "*", methods: "*")]
     public class CiudadController : ApiController
     {
-        [Scope("read")]
+        //[Scope("read")]
         public IHttpActionResult Get(int id) 
         {
             try

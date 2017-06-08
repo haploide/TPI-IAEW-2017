@@ -2,7 +2,9 @@
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Threading.Tasks;
-using AuthorizationServer.App_Start; 
+using AuthorizationServer.App_Start;
+
+
 namespace TuriCorAPI.Controllers
 {
      
@@ -27,6 +29,7 @@ namespace TuriCorAPI.Controllers
                 {
                     return NotFound();
                 }
+                
                 return Ok(vehiculos);
             }
             catch (Exception ex)

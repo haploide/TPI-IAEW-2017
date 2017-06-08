@@ -4,38 +4,50 @@
         <p class="lead">Listado de Vehiculos</p>
         <!--<p><a href="#/newcliente" class="btn btn-primary">Nuevo Cliente</a></p>-->
     </div>
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="cmbPais" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Seleccione Pais
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-        </ul>
-    </div>
-
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="cmbCiudad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Seleccione Ciudad
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-        </ul>
-    </div>
+    <form>
+        <div>
+            <div class="form-group">
+                <label for="cmbPais">Pais:</label>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="cmbPais" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Seleccione Pais
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-click="vehiculosList.buscarCiudades()">
+                        <li ng-repeat="pais in vehiculosList.paises"><a>{{pais.Nombre}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="datepickerHasta">Fecha Hasta:</label>
+                <input type="text" id="datepickerHasta" ng-model="fechaDesde">
+            </div>
+        </div>
+        <div>
+            <div class="form-group">
+                <label for="cmbCiudad">Ciudad:</label>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="cmbCiudad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Seleccione Ciudad
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li ng-repeat="ciudad in vehiculosList.ciudades"><a>{{ciudad.Nombre}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="datepickerHasta">Fecha Hasta:</label>
+               <input type="text" id="datepickerHasta" ng-model="fechaHasta">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-click="vehiculosList.buscarVehiculos()">Buscar</button>
+    </form>
 
     <div>
         <div data-ng-show="isBusy">PROCESANDO....</div>
     </div>
-    <div class="well row">
+    <div class="col-md-12 row">
         <table class="table">
             <tr>
         
@@ -52,7 +64,7 @@
                 <th>CantidadPuertas</th>
                 <th>CiudadId</th>
             </tr>
-            <tr data-ng-repeat="vehi in vehiculosList.vehiculos">
+            <tr data-ng-repeat="vehi in vehiculosList.vehiculos | orderBy:'Id'">
                 
                 <th>{{vehi.Id }}</th>
                 <th>{{vehi.Marca }}</th>

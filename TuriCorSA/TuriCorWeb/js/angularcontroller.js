@@ -14,19 +14,57 @@
         var homeController = this;
         homeController.title = "TuriCor S.A.";
 
-    }).controller('vehiculosController', function ($http) {
+    }).controller('vehiculosController', function ($http, $scope) {
         var vehiculosController = this;
         vehiculosController.title = 'Consulta de Vehiculos Disponibles';
         vehiculosController.vehiculos = [];
+        vehiculosController.paises = [];
+        vehiculosController.ciudades = [];
+        vehiculosController.buscarVehiculos = function () {
+            vehiculosController.isBusy = true;
+            $http({
+                method: 'GET',
+                url: 'http://localhost:2253/api/vehiculo?Id=2&fechaHoraRetiro=' + $scope.fechaDesde + '&fechaHoraDevolucion=' + $scope.fechaHasta,
+                headers: {
+                    'Accept': "application/json"
+                }
+            }).then(function (response) {
+                angular.copy(response.data.VehiculosEncontrados, vehiculosController.vehiculos);
+                vehiculosController.isBusy = false;
+
+            }, function (response) {
+                alert("Error");
+            }).then(function () {
+
+            });
+        }
+        vehiculosController.buscarCiudades = function () {
+            vehiculosController.isBusy = true;
+            $http({
+                method: 'GET',
+                url: 'http://localhost:2253/api/ciudad?id=1',
+                headers: {
+                    'Accept': "application/json"
+                }
+            }).then(function (response) {
+                angular.copy(response.data.Ciudades, vehiculosController.ciudades);
+                vehiculosController.isBusy = false;
+
+            }, function (response) {
+                alert("Error");
+            }).then(function () {
+
+            });
+        }
         vehiculosController.isBusy = true;
         $http({
             method: 'GET',
-            url: 'http://localhost:2253/api/vehiculo?Id=2&fechaHoraRetiro=2016-1-1T00:00:00&fechaHoraDevolucion=2016-3-27T23:59:59',
+            url: 'http://localhost:2253/api/pais',
             headers: {
                 'Accept': "application/json"
             }
         }).then(function (response) {
-            angular.copy(response.data.VehiculosEncontrados, vehiculosController.vehiculos);
+            angular.copy(response.data.Paises, vehiculosController.paises);
             vehiculosController.isBusy = false;
 
         }, function (response) {
@@ -34,4 +72,5 @@
         }).then(function () {
 
         });
+
     })
