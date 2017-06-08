@@ -8,16 +8,8 @@
         <div>
             <div class="form-group">
                 <label for="cmbPais">Pais:</label>
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="cmbPais" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Seleccione Pais
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-click="vehiculosList.buscarCiudades()">
-                        <li ng-repeat="pais in vehiculosList.paises"><a>{{pais.Nombre}}</a></li>
-                    </ul>
-                </div>
-            </div>
+                </select>
+</div>
             <div class="form-group">
                 <label for="datepickerHasta">Fecha Hasta:</label>
                 <input type="text" id="datepickerHasta" ng-model="fechaDesde">
@@ -26,15 +18,10 @@
         <div>
             <div class="form-group">
                 <label for="cmbCiudad">Ciudad:</label>
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="cmbCiudad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Seleccione Ciudad
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li ng-repeat="ciudad in vehiculosList.ciudades"><a>{{ciudad.Nombre}}</a></li>
-                    </ul>
-                </div>
+                <select class="form-control">
+                    <option ng-repeat="ciudad in vehiculosList.ciudades">{{ciudad.Nombre}}</option>
+                    
+                </select>
             </div>
             <div class="form-group">
                 <label for="datepickerHasta">Fecha Hasta:</label>
