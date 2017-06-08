@@ -1,0 +1,36 @@
+﻿<div>
+    <div data-ng-show="isBusy">PROCESANDO....</div>
+</div>
+<div class="col-md-12 row">
+    <table class="table">
+        <tr>
+          
+            <th>Id</th>
+            <th>CodigoReserva</th>
+            <th>FechaReserva</th>
+            <th>IdCliente</th>
+            <th>IdVendedor</th>
+            <th>Costo</th>
+            <th>PrecioVenta</th>
+            <th>IdCiudad</th>
+            <th>IdPais</th>
+            
+        </tr>
+        <tr data-ng-repeat="res in reservasList.reservas | orderBy:'Id'">
+
+            <th>{{res.Id }}</th>
+            <th>{{res.CodigoReserva }}</th>
+            <th>{{res.FechaReserva }}</th>
+            <th>{{res.IdCliente }}</th>
+            <th>{{res.IdVendedor }}</th>
+            <th>{{res.Costo }}</th>
+            <th>{{res.PrecioVenta }}</th>
+            <th>{{res.IdCiudad }}</th>
+            <th>{{res.IdPais }}</th>
+            
+
+        </tr>
+    </table>
+
+</div>
+
