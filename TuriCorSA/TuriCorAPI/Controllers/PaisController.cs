@@ -40,7 +40,7 @@ namespace TuriCorAPI.Controllers
                 var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
 
                 var pais = cliente.ConsultarPaises();
-                
+                pais
               
                 if (pais == null)
                 {
