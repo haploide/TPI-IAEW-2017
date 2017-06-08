@@ -5,7 +5,7 @@
         <!--<p><a href="#/newcliente" class="btn btn-primary">Nuevo Cliente</a></p>-->
     </div>
     <form class="form-horizontal" name="listadoVehiculosForm" novalidate>
-        <div>
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="cmbPais">Pais:</label>
                 <select class="form-control" id="cmbPais" required >
@@ -19,7 +19,7 @@
                 
             </div>
         </div>
-        <div>
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="cmbCiudad">Ciudad:</label>
                 <select id="cmbCiudad" class="form-control" required disabled>
@@ -29,11 +29,16 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="datepickerHasta">Fecha Hasta:</label>
-               <input type="text" id="datepickerHasta" required ng-model="fechaHasta" ng-minlength="10" placeholder="yyyy-mm-dd">
+                <label for="datepickerDesde">Fecha Desde:</label>
+               <input type="text" id="datepickerDesde" required ng-model="fechaHasta" ng-minlength="10" placeholder="yyyy-mm-dd">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" ng-disabled="listadoVehiculosForm.$invalid" ng-click="vehiculosList.buscarVehiculos()">Buscar</button>
+        
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" ng-disabled="listadoVehiculosForm.$invalid" ng-click="vehiculosList.buscarVehiculos()">Buscar</button>
+                <button type="submit" class="btn btn-primary" ng-click="vehiculosList.limpiar()">Limpiar</button>
+            </div>
+        
     </form>
 
     <div>
@@ -43,22 +48,22 @@
         <table class="table">
             <tr>
         
-                <th>Id</th>
+                <th ng-hide="true">Id</th>
                 <th>Marca</th>
                 <th>Modelo</th>
-                <th>PrecioPorDia</th>
+                <th>Precio por Dia</th>
                 <th>Puntaje</th>
-                <th>TieneAireAcon</th>
-                <th>TieneDireccion</th>
-                <th>TipoCambio</th>
-                <th>VehiculoCiudadId</th>
-                <th>CantidadDisponible</th>
-                <th>CantidadPuertas</th>
+                <th>Aire Acondicionado</th>
+                <th>Direccion</th>
+                <th>Tipo de Cambio</th>
+                <th ng-hide="true">VehiculoCiudadId</th>
+                <th>Cantidad Disponible</th>
+                <th>Cantidad Puertas</th>
                 <th>CiudadId</th>
             </tr>
             <tr data-ng-repeat="vehi in vehiculosList.vehiculos | orderBy:'Id'">
                 
-                <th>{{vehi.Id }}</th>
+                <th ng-hide="true">{{vehi.Id }}</th>
                 <th>{{vehi.Marca }}</th>
                 <th>{{vehi.Modelo }}</th>
                 <th>{{vehi.PrecioPorDia }}</th>
@@ -66,7 +71,7 @@
                 <th>{{vehi.TieneAireAcon }}</th>
                 <th>{{vehi.TieneDireccion }}</th>
                 <th>{{vehi.TipoCambio }}</th>
-                <th>{{vehi.VehiculoCiudadId }}</th>
+                <th ng-hide="true">{{vehi.VehiculoCiudadId }}</th>
                 <th>{{vehi.CantidadDisponible }}</th>
                 <th>{{vehi.CantidadPuertas }}</th>
                 <th>{{vehi.CiudadId }}</th>

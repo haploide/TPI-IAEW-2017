@@ -38,6 +38,18 @@
                 }
             }).then(function (response) {
                 angular.copy(response.data.VehiculosEncontrados, vehiculosController.vehiculos);
+                $.each(vehiculosController.vehiculos, function () {
+                    if (this.TieneAireAcon) {
+                        this.TieneAireAcon = 'Si';
+                    } else {
+                        this.TieneAireAcon = 'No';
+                    }
+                    if (this.TieneDireccion) {
+                        this.TieneDireccion = 'Si';
+                    } else {
+                        this.TieneDireccion = 'No';
+                    }
+                })
                 vehiculosController.isBusy = false;
 
             }, function (response) {
@@ -82,7 +94,19 @@
         }).then(function () {
 
         });
-        
+        vehiculosController.limpiar = function () {
+            $('#cmbCiudad').attr('disabled', true);
+            $('#datepickerHasta').val('');
+            $('#datepickerDesde').val('');
+            $('#cmbCiudad option:eq(0)').prop('selected', true);
+            $('#cmbPais option:eq(0)').prop('selected', true);
+            vehiculosController.vehiculos = [];
+            vehiculosController.ciudades = [];
+            $scope.fechaDesde = '';
+            $scope.fechaHasta = '';
+            vehiculosController.ciudadSeleccionada = '';
+
+        }
 
     }).controller('reservasController', function ($http, $scope) {
         var reservasController = this;
