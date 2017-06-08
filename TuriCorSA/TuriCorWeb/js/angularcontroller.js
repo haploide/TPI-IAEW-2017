@@ -24,11 +24,15 @@
         vehiculosController.vehiculos = [];
         vehiculosController.paises = [];
         vehiculosController.ciudades = [];
+        vehiculosController.seleccionarCiudad=function (id) {
+            vehiculosController.ciudadSeleccionada = id;
+        };
+        
         vehiculosController.buscarVehiculos = function () {
             vehiculosController.isBusy = true;
             $http({
                 method: 'GET',
-                url: 'http://localhost:2253/api/vehiculo?Id=2&fechaHoraRetiro=' + $scope.fechaDesde + '&fechaHoraDevolucion=' + $scope.fechaHasta,
+                url: 'http://localhost:2253/api/vehiculo?Id=' + vehiculosController.ciudadSeleccionada + '&fechaHoraRetiro=' + $scope.fechaDesde + '&fechaHoraDevolucion=' + $scope.fechaHasta,
                 headers: {
                     'Accept': "application/json"
                 }
@@ -42,11 +46,12 @@
 
             });
         }
-        vehiculosController.buscarCiudades = function () {
+        vehiculosController.buscarCiudades = function (pais) {
+            //alert(pais);
             vehiculosController.isBusy = true;
             $http({
                 method: 'GET',
-                url: 'http://localhost:2253/api/ciudad?id=1',
+                url: 'http://localhost:2253/api/ciudad?id='+pais.Id,
                 headers: {
                     'Accept': "application/json"
                 }
@@ -59,6 +64,7 @@
             }).then(function () {
 
             });
+            $('#cmbCiudad').removeAttr('disabled');
         }
         vehiculosController.isBusy = true;
         $http({
@@ -76,6 +82,7 @@
         }).then(function () {
 
         });
+        
 
     }).controller('reservasController', function ($http, $scope) {
         var reservasController = this;
@@ -102,3 +109,5 @@
         }
 
     })
+
+

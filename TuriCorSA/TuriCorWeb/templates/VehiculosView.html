@@ -4,31 +4,36 @@
         <p class="lead">Listado de Vehiculos</p>
         <!--<p><a href="#/newcliente" class="btn btn-primary">Nuevo Cliente</a></p>-->
     </div>
-    <form>
+    <form class="form-horizontal" name="listadoVehiculosForm" novalidate>
         <div>
             <div class="form-group">
                 <label for="cmbPais">Pais:</label>
+                <select class="form-control" id="cmbPais" required >
+                    <option disabled selected>Seleccione...</option>
+                    <option ng-repeat="pais in vehiculosList.paises" ng-click="vehiculosList.buscarCiudades(pais)">{{pais.Nombre}}</option>
                 </select>
 </div>
             <div class="form-group">
                 <label for="datepickerHasta">Fecha Hasta:</label>
-                <input type="text" id="datepickerHasta" ng-model="fechaDesde">
+                <input type="text" required id="datepickerHasta" ng-model="fechaDesde" ng-minlength="10" placeholder="yyyy-mm-dd">
+                
             </div>
         </div>
         <div>
             <div class="form-group">
                 <label for="cmbCiudad">Ciudad:</label>
-                <select class="form-control">
-                    <option ng-repeat="ciudad in vehiculosList.ciudades">{{ciudad.Nombre}}</option>
+                <select id="cmbCiudad" class="form-control" required disabled>
+                    <option disabled selected>Seleccione...</option>
+                    <option ng-repeat="ciudad in vehiculosList.ciudades" ng-click="vehiculosList.seleccionarCiudad(ciudad.Id)">{{ciudad.Nombre}}</option>
                     
                 </select>
             </div>
             <div class="form-group">
                 <label for="datepickerHasta">Fecha Hasta:</label>
-               <input type="text" id="datepickerHasta" ng-model="fechaHasta">
+               <input type="text" id="datepickerHasta" required ng-model="fechaHasta" ng-minlength="10" placeholder="yyyy-mm-dd">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" ng-click="vehiculosList.buscarVehiculos()">Buscar</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="listadoVehiculosForm.$invalid" ng-click="vehiculosList.buscarVehiculos()">Buscar</button>
     </form>
 
     <div>
