@@ -84,6 +84,8 @@ namespace TuriCorAPI.Controllers
         {
             try
             {
+                var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
+
                 if (_db.Reserva == null || !_db.Reserva.Any())
                 {
                     return NotFound();
@@ -96,6 +98,18 @@ namespace TuriCorAPI.Controllers
                 _db.Reserva.Add(res);
 
                 _db.SaveChanges();
+
+                var reserva = cliente.ReservarVehiculo(new ServiceReferenceReservaVehiculos.ReservarVehiculoRequest()
+                {
+                   ApellidoNombreCliente = res.Cliente.Apellido +" "+ res.Cliente.Nombre,
+            
+                   //FechaHoraDevolucion = res.
+                   //FechaHoraRetiro =.
+                   IdVehiculoCiudad = res.IdVehiculoCiudad,
+                   //LugarDevolucion =,
+                   //LugarRetiro =,
+                   NroDocumentoCliente = res.Cliente.NroDocumento,
+                });
 
                 return Created("api/Reserva/" + res.Id, res);
 
@@ -142,11 +156,14 @@ namespace TuriCorAPI.Controllers
             }
         }
 
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult Delete(int id, string code)
         {
             try
             {
                 var res = _db.Reserva.Find(id);
+                var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
+
+               
 
                 if (res == null)
                 {
@@ -155,6 +172,12 @@ namespace TuriCorAPI.Controllers
                 _db.Reserva.Remove(res);
 
                 _db.SaveChanges();
+
+                var reserva = cliente.CancelarReserva(new ServiceReferenceReservaVehiculos.CancelarReservaRequest()
+                {
+                    CodigoReserva = code
+                });
+
 
                 return Ok(res);
 
