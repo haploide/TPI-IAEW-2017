@@ -36,5 +36,37 @@ namespace TuriCorAPI.Controllers
                 return InternalServerError(ex);
             }
         }
+        public IHttpActionResult Get(int idCiudad, int idPais)
+        {
+            try
+            {
+                var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
+
+                var ciudades = cliente.ConsultarCiudades(new ServiceReferenceReservaVehiculos.ConsultarCiudadesRequest()
+                {
+                    IdPais = idPais,
+
+                });
+
+               
+                if (ciudades == null)
+                {
+                    return NotFound();
+                }
+                foreach (var c in ciudades.Ciudades)
+                {
+                    if (c.Id == idCiudad)
+                    {
+                        return Ok(c);
+                    }
+                }
+                return Ok(c);
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
     }
 }
