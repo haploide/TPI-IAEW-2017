@@ -133,8 +133,8 @@
                 'Accept': "application/json"
             }
         }).then(function (response) {
-            angular.copy(response.data.Paises, reservasController.paises);
-            alert(response.data.Paises);
+            angular.copy(response.data, reservasController.paises);
+            //alert(response.data.Paises);
             $.each(reservasController.reservas, function () {
                 
                 this.IdPais = reservasController.paises.Nombre;
