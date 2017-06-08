@@ -11,6 +11,10 @@
             controller: "reservasController as reservasList",
             templateUrl: "templates/ReservasView.html"
 
+        }).when("/nuevareserva", {
+            controller: "nuevareservasController as registrarReserva",
+            templateUrl: "templates/registrarReservaView.html"
+
         }).otherwise({
             redirectTo: "/"
         });
