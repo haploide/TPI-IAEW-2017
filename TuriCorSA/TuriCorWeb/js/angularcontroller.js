@@ -115,6 +115,7 @@
         reservasController.title = 'Consulta de reservas realizadas';
         reservasController.reservas = [];
         reservasController.paises = [];
+        reservasController.ciudad = [];
 
         reservasController.buscarReservas = function () {
             reservasController.isBusy = true;
@@ -126,30 +127,46 @@
                 }
             }).then(function (response) {
                 angular.copy(response.data, reservasController.reservas);
-                reservasController.isBusy = true;
-        $http({
-            method: 'GET',
+                
+                $http({
+                    method: 'GET',
          
-            url: 'http://localhost:2253/api/pais?id=1',
-            headers: {
-                'Accept': "application/json"
-            }
-        }).then(function (response) {
-            angular.copy(response.data, reservasController.paises);
-            //alert(response.data.Paises);
-            $.each(reservasController.reservas, function () {
-                
-                this.IdPais = reservasController.paises.Nombre;
-                
-            }
-            )
-            reservasController.isBusy = false;
+                 url: 'http://localhost:2253/api/pais?id='+ reservasController.reservas[0].IdPais,
+                    headers: {
+                      'Accept': "application/json"
+                }
+                }).then(function (response) {
+                    angular.copy(response.data, reservasController.paises);
+                    $.each(reservasController.reservas, function () {
 
-        }, function (response) {
-            alert("Error");
-        }).then(function () {
+                        this.IdPais = reservasController.paises.Nombre;
 
-        });
+                    });
+                }, function (response) {
+                    alert("Error");
+                }).then(function () {
+
+                });
+                $http({
+                    method: 'GET',
+
+                    url: 'http://localhost:2253/api/ciudad?idCiudad=' + reservasController.reservas[0].IdCiudad + '&idPais=' + reservasController.reservas[0].IdPais,
+                    headers: {
+                        'Accept': "application/json"
+                    }
+                }).then(function (response) {
+                    angular.copy(response.data, reservasController.ciudad);
+                    $.each(reservasController.reservas, function () {
+
+                        this.IdCiudad = reservasController.ciudad.Nombre;
+
+                    });
+                }, function (response) {
+                    alert("Error");
+                }).then(function () {
+
+                });
+                
                 reservasController.isBusy = false;
 
             }, function (response) {

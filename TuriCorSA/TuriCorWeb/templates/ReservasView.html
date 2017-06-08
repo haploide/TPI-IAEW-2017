@@ -10,25 +10,25 @@
     <table class="table">
         <tr>
           
-            <th>Id</th>
-            <th>CodigoReserva</th>
-            <th>FechaReserva</th>
+            <th ng-hide="true">Id</th>
+            <th>Codigo de Reserva</th>
+            <th>Fecha Reserva</th>
             <th>Cliente</th>
             <th>Vendedor</th>
-            <th>Costo</th>
-            <th>PrecioVenta</th>
-            <th>IdCiudad</th>
-            <th>IdPais</th>
+            <th ng-hide="true">Costo</th>
+            <th>Precio de Venta</th>
+            <th>Ciudad</th>
+            <th>Pais</th>
             
         </tr>
         <tr data-ng-repeat="res in reservasList.reservas | orderBy:'Id'">
 
-            <th>{{res.Id }}</th>
+            <th ng-hide="true">{{res.Id }}</th>
             <th>{{res.CodigoReserva }}</th>
             <th>{{res.FechaReserva }}</th>
             <th>{{res.Cliente.Nombre+' '+res.Cliente.Apellido }}</th>
             <th>{{res.Vendedor.Nombre }}</th>
-            <th>{{res.Costo }}</th>
+            <th ng-hide="true">{{res.Costo }}</th>
             <th>{{res.PrecioVenta }}</th>
             <th>{{res.IdCiudad }}</th>
             <th>{{res.IdPais }}</th>
