@@ -8,8 +8,8 @@
                 templateUrl: "templates/VehiculosView.html"
 
         }).when("/listarreservas", {
-            controller: "reservaController as reservasList",
-            templateUrl: "templates/reservasView.html"
+            controller: "reservasController as reservasList",
+            templateUrl: "templates/ReservasView.html"
 
         }).otherwise({
             redirectTo: "/"
@@ -67,31 +67,7 @@
             headers: {
                 'Accept': "application/json"
             }
-        }).controller('reservasController', function ($http, $scope) {
-            var reservasController = this;
-            reservasController.title = 'Consulta de reservas realizadas';
-            reservasController.reservas = [];
-           
-            reservasController.buscarReservas = function () {
-                reservasController.isBusy = true;
-                $http({
-                    method: 'GET',
-                    url: 'http://localhost:2253/api/Reserva',
-                    headers: {
-                        'Accept': "application/json"
-                    }
-                }).then(function (response) {
-                    angular.copy(response.data.Reservas, reservasController.reservas);
-                    reservasController.isBusy = false;
-
-                }, function (response) {
-                    alert("Error");
-                }).then(function () {
-
-                });
-            }
-           
-            }).then(function (response) {
+        }).then(function (response) {
             angular.copy(response.data.Paises, vehiculosController.paises);
             vehiculosController.isBusy = false;
 
@@ -100,5 +76,29 @@
         }).then(function () {
 
         });
+
+    }).controller('reservasController', function ($http, $scope) {
+        var reservasController = this;
+        reservasController.title = 'Consulta de reservas realizadas';
+        reservasController.reservas = [];
+
+        reservasController.buscarReservas = function () {
+            reservasController.isBusy = true;
+            $http({
+                method: 'GET',
+                url: 'http://localhost:2253/api/Reserva',
+                headers: {
+                    'Accept': "application/json"
+                }
+            }).then(function (response) {
+                angular.copy(response.data, reservasController.reservas);
+                reservasController.isBusy = false;
+
+            }, function (response) {
+                alert("Error");
+            }).then(function () {
+
+            });
+        }
 
     })
