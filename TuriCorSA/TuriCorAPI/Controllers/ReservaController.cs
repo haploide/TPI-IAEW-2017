@@ -161,30 +161,39 @@ namespace TuriCorAPI.Controllers
             }
         }
 
-        public IHttpActionResult Delete(int id, string code)
+        public IHttpActionResult Delete(int id)
         {
             try
             {
-                var res = _db.Reserva.Find(id);
-                var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
-
-               
-
+                var res = _db.Reserva;
                 if (res == null)
                 {
                     return NotFound();
                 }
-                _db.Reserva.Remove(res);
-
-                _db.SaveChanges();
-
-                var reserva = cliente.CancelarReserva(new ServiceReferenceReservaVehiculos.CancelarReservaRequest()
+                foreach (var r in res)
                 {
-                    CodigoReserva = code
-                });
+                    if (r.Id  == id)
+                    {
+                        var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
+                        
+                        _db.Reserva.Remove(r);
+
+                        _db.SaveChanges();
+
+                        var reserva = cliente.CancelarReserva(new ServiceReferenceReservaVehiculos.CancelarReservaRequest()
+                        {
+                            CodigoReserva = r.CodigoReserva 
+                        });
 
 
-                return Ok(res);
+                        return Ok(r);
+
+                    }            
+                }
+
+                return Ok();
+
+
 
             }
             catch (Exception ex)

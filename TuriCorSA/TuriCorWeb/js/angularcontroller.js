@@ -135,7 +135,26 @@
         reservasController.reservas = [];
         reservasController.paises = [];
         reservasController.ciudad = [];
+        //CANCELAR RESERVA
+        reservasController.delete = function (res) {
+          //  alert(res.Vendedor.Nombre)
+            $http({
+                method: 'DELETE',
+                
+                url: 'http://localhost:2253/api/reserva/'+res.Id,
+               
+                headers: {
+                    'Accept': "application/json"
+                }
+            }).then(function (response) {
+                // $window.location = "#/clientes";
+                alert('Exito');
+            }, function (response) {
+                alert("Error");
+            }).then(function () {
 
+            });
+        };
         reservasController.buscarReservas = function () {
             reservasController.isBusy = true;
             $http({
