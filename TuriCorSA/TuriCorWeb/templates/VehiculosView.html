@@ -61,10 +61,10 @@
                 <th>Cantidad Puertas</th>
                 <th>CiudadId</th>
             </tr>
-            <tr data-ng-repeat="vehi in vehiculosList.vehiculos | orderBy:'Id'">
+            <tr class='clickable-row' data-ng-repeat="vehi in vehiculosList.vehiculos | orderBy:'Id'">
                 
                 <th ng-hide="true">{{vehi.Id }}</th>
-                <th>{{vehi.Marca }}</th>
+                <th ng-click="vehiculosController.clickeando()">{{vehi.Marca }}</th>
                 <th>{{vehi.Modelo }}</th>
                 <th>{{vehi.PrecioPorDia }}</th>
                 <th>{{vehi.Puntaje }}</th>
@@ -75,6 +75,7 @@
                 <th>{{vehi.CantidadDisponible }}</th>
                 <th>{{vehi.CantidadPuertas }}</th>
                 <th>{{vehi.CiudadId }}</th>
+                <th><a class="btn btn-primary" href="#!/nuevareserva">Reservar</a></th>
 
             </tr>
         </table>

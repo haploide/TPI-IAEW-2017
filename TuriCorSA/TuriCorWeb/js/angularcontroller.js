@@ -28,6 +28,7 @@
         vehiculosController.vehiculos = [];
         vehiculosController.paises = [];
         vehiculosController.ciudades = [];
+        
         vehiculosController.seleccionarCiudad=function (id) {
             vehiculosController.ciudadSeleccionada = id;
         };
@@ -63,6 +64,9 @@
             }).then(function () {
 
             });
+            $('.clickable-row').click(function () {
+                alert('funca');
+            })
         }
         vehiculosController.buscarCiudades = function (pais) {
             //alert(pais);
@@ -113,6 +117,7 @@
             vehiculosController.ciudadSeleccionada = '';
 
         }
+        
 
     }).controller('reservasController', function ($http, $scope) {
         var reservasController = this;
@@ -180,6 +185,26 @@
             });
         }
 
-    })
+    }).controller('nuevareservasController', function ($http, $window) {
+        var nuevareservasController = this;
+        nuevareservasController.nuevaReserva = {};
+        nuevareservasController.save = function () {
+            $http({
+                method: 'Post',
+                url: 'http://localhost:31172/api/Cliente',
+                data: nuevareservasController.nuevaReserva,
+                headers: {
+                    'Accept': "application/json"
+                }
+            }).then(function (response) {
+                $window.location = "#/clientes";
+            }, function (response) {
+                alert("Error");
+            }).then(function () {
+
+            });
+        };
+
+    });
 
 
