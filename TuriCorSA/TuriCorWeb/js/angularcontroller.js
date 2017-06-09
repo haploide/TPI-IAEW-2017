@@ -127,11 +127,11 @@
         reservasController.ciudad = [];
         //CANCELAR RESERVA
         reservasController.delete = function (res) {
-            alert(res.Vendedor.Nombre)
+          //  alert(res.Vendedor.Nombre)
             $http({
                 method: 'DELETE',
                 
-                url: 'http://localhost:2253/api/reserva?id=' + res.Id + '&codigoReserva=' + res.CodigoReserva,
+                url: 'http://localhost:2253/api/reserva/'+res.Id,
                
                 headers: {
                     'Accept': "application/json"
