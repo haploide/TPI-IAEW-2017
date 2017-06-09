@@ -1,42 +1,38 @@
 ﻿<div class="jumbotron">
     <h1>{{ registarReserva.title }}</h1>
     <p class="lead">Registrar Reserva</p>
-    <button type="submit" class="btn btn-primary" ng-click="reservasList.buscarReservas()">Buscar</button>
+  
     <div class="form-group">
-        <label for="datepickerHasta">Codigo de reserva:</label>
-        <p class="navbar-text"></p>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Apellido y Nombre</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Apellido y Nombre">
+        </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Fecha Devolucion</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Fecha Devolucion">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Fecha Retiro</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Fecha Retiro">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Id Vehiculo Ciudad</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Id Vehiculo Ciudad">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Lugar de Devolucion</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Lugar de Devolucion">
+            </div>
+        <div class="form-group">
+                <label for="exampleInputEmail1">Lugar de Retiro</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Lugar de Retiro">
+            </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">DNI Cliente</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="DNI Cliente">
+        </div>
+        <button type="button" class="btn btn-primary">Registrar Reserva</button>
 
     </div>
-</div>
-<div>
-    <div data-ng-show="isBusy">PROCESANDO....</div>
-</div>
-<div class="col-md-12 row">
-    <table class="table">
-        <tr>
-
-            <th ng-hide="true">Id</th>
-            <th>Codigo de Reserva</th>
-            <th>Fecha Reserva</th>
-            <th>Cliente</th>
-            <th>Vendedor</th>
-            <th ng-hide="true">Costo</th>
-            <th>Precio de Venta</th>
-            <th>Ciudad</th>
-            <th>Pais</th>
-
-        </tr>
-        <tr data-ng-repeat="res in reservasList.reservas | orderBy:'Id'">
-            <th ng-hide="true">{{res.Id }}</th>
-            <th>{{res.CodigoReserva }}</th>
-            <th>{{res.FechaReserva }}</th>
-            <th>{{res.Cliente.Nombre+' '+res.Cliente.Apellido }}</th>
-            <th>{{res.Vendedor.Nombre }}</th>
-            <th ng-hide="true">{{res.Costo }}</th>
-            <th>{{res.PrecioVenta }}</th>
-            <th>{{res.IdCiudad }}</th>
-            <th>{{res.IdPais }}</th>
-
-        </tr>
-    </table>
 </div>
