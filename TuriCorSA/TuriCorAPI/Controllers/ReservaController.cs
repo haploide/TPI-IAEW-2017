@@ -9,7 +9,7 @@ using TuriCorAPI.Models;
 using AuthorizationServer.App_Start;
 namespace TuriCorAPI.Controllers
 {
-   
+   //[EnableCors(origins: "http://localhost:8660", headers: "*", methods: "*")]
     //[Scope("read")]
     public class ReservaController : ApiController
     {
@@ -79,8 +79,8 @@ namespace TuriCorAPI.Controllers
                 return InternalServerError(ex);
             }
         }
-
-        public IHttpActionResult Post([FromBody]Reserva res, DateTime fechaDev, DateTime fechaRet)
+        [HttpPost]
+        public IHttpActionResult Post([FromBody]Reserva res)
         {
             try
             {
@@ -88,14 +88,14 @@ namespace TuriCorAPI.Controllers
 
                 var reserva = cliente.ReservarVehiculo(new ServiceReferenceReservaVehiculos.ReservarVehiculoRequest()
                 {
-                    ApellidoNombreCliente = res.Cliente.Apellido + " " + res.Cliente.Nombre,
+                    //ApellidoNombreCliente = res.Cliente.Apellido + " " + res.Cliente.Nombre,
 
-                    FechaHoraDevolucion = fechaDev,
-                    FechaHoraRetiro =fechaRet,
-                    IdVehiculoCiudad = res.IdVehiculoCiudad,
+                    //FechaHoraDevolucion = fechaDev,
+                    //FechaHoraRetiro =fechaRet,
+                    //IdVehiculoCiudad = res.IdVehiculoCiudad,
                     //LugarDevolucion =,
                     //LugarRetiro =,
-                    NroDocumentoCliente = res.Cliente.NroDocumento,
+                    //NroDocumentoCliente = res.Cliente.NroDocumento,
 
                 });
 

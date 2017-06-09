@@ -18,17 +18,26 @@
         }).otherwise({
             redirectTo: "/"
         });
+    }).factory('reserva', function () {
+        return { FechaReserva: moment().format('YYYY-MM-DD') };
+
+
     }).controller('homeController', function ($http) {
         var homeController = this;
         homeController.title = "TuriCor S.A.";
 
-    }).controller('vehiculosController', function ($http, $scope) {
+    }).controller('vehiculosController', function ($http, $scope, $location, reserva) {
         var vehiculosController = this;
         vehiculosController.title = 'Consulta de Vehiculos Disponibles';
         vehiculosController.vehiculos = [];
         vehiculosController.paises = [];
         vehiculosController.ciudades = [];
-        
+        vehiculosController.nuevareserva = function (vehi) {
+            reserva.FechaDesde = $scope.fechaDesde;
+
+            $location.url('/nuevareserva');
+            
+        }
         vehiculosController.seleccionarCiudad=function (id) {
             vehiculosController.ciudadSeleccionada = id;
         };
@@ -118,6 +127,7 @@
 
         }
         
+        
 
     }).controller('reservasController', function ($http, $scope) {
         var reservasController = this;
@@ -132,6 +142,7 @@
                 method: 'GET',
                 url: 'http://localhost:2253/api/Reserva',
                 headers: {
+                    'Content-Type': 'application/json',
                     'Accept': "application/json"
                 }
             }).then(function (response) {
@@ -185,11 +196,12 @@
             });
         }
 
-    }).controller('nuevareservasController', function ($http, $window) {
+    }).controller('nuevareservasController', function ($http, $scope, reserva) {
         var nuevareservasController = this;
         nuevareservasController.title = 'Registrar Nueva Reserva';
-        nuevareservasController.nuevaReserva = {};
-        nuevareservasController.nuevaReserva.FechaReserva = moment().format('YYYY-MM-DD');
+        nuevareservasController.nuevaReserva = reserva;
+        //nuevareservasController.nuevaReserva.FechaReserva = ;
+       
         nuevareservasController.save = function () {
             $http({
                 method: 'POST',
@@ -209,5 +221,7 @@
         };
 
     });
+
+
 
 

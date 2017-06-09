@@ -5,20 +5,20 @@
     <div class="form-group">
         <div class="form-group">
             <label for="apeynom">Apellido y Nombre</label>
-            <input type="text" class="form-control" id="apeynom" placeholder="Apellido y Nombre">
+            <input ng-model="registrarReserva.nuevaReserva.ApellidoNombreCliente" type="text" class="form-control" id="apeynom" placeholder="Apellido y Nombre">
         </div>
 
             <div class="form-group">
                 <label for="fechaDev">Fecha Devolucion</label>
-                <input type="date"  class="form-control" id="fechaDev" placeholder="Fecha Devolucion">
+                <input ng-model="registrarReserva.nuevaReserva.FechaHasta" type="text"  class="form-control" id="fechaDev" placeholder="Fecha Devolucion">
             </div>
             <div class="form-group">
                 <label for="fechaRet">Fecha Retiro</label>
-                <input type="date" class="form-control" id="fechaRet" placeholder="Fecha Retiro">
+                <input ng-model="registrarReserva.nuevaReserva.FechaDesde" type="text" class="form-control" id="fechaRet" placeholder="Fecha Retiro">
             </div>
             <div class="form-group">
                 <label for="idVehiCiu">Id Vehiculo Ciudad</label>
-                <input ng-model="registrarReserva.nuevaReserva.IdVehiculoCiudad" type="text"  class="form-control" id="idVehiCiu" placeholder="Id Vehiculo Ciudad">
+                <input ng-model="registrarReserva.nuevaReserva.VehiculoCiudadId" type="text"  class="form-control" id="idVehiCiu" placeholder="Id Vehiculo Ciudad">
             </div>
             <!--<div class="form-group">
                 <label for="lugarDev">Lugar de Devolucion</label>
@@ -30,7 +30,7 @@
             </div>-->
         <div class="form-group">
             <label for="DNI">DNI Cliente</label>
-            <input type="text" class="form-control" id="DNI" placeholder="DNI Cliente">
+            <input ng-model="registrarReserva.nuevaReserva.NroDocumentoCliente" type="text" class="form-control" id="DNI" placeholder="DNI Cliente">
         </div>
         <!--<div class="form-group">
             <label for="codRes">Codigo de Reserva</label>

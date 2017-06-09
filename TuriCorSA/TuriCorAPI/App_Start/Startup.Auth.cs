@@ -11,7 +11,7 @@ namespace TuriCorAPI
     {
         public void ConfigureAuth(IAppBuilder app)
         {
-            //app.UseCors(CorsOptions.AllowAll);
+            app.UseCors(CorsOptions.AllowAll);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
     }
