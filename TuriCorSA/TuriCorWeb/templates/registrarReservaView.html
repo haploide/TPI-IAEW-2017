@@ -1,5 +1,5 @@
 ﻿<div class="jumbotron">
-    <h1>{{ registarReserva.title }}</h1>
+    <h1>{{ registrarReserva.title }}</h1>
     <p class="lead">Registrar Reserva</p>
   
     <div class="form-group">
@@ -18,45 +18,53 @@
             </div>
             <div class="form-group">
                 <label for="idVehiCiu">Id Vehiculo Ciudad</label>
-                <input type="text"  class="form-control" id="idVehiCiu" placeholder="Id Vehiculo Ciudad">
+                <input ng-model="registrarReserva.nuevaReserva.IdVehiculoCiudad" type="text"  class="form-control" id="idVehiCiu" placeholder="Id Vehiculo Ciudad">
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label for="lugarDev">Lugar de Devolucion</label>
                 <input type="text" class="form-control" id="lugarDev" placeholder="Lugar de Devolucion">
             </div>
         <div class="form-group">
                 <label for="LugarRet">Lugar de Retiro</label>
                 <input type="text" class="form-control" id="LugarRet" placeholder="Lugar de Retiro">
-            </div>
+            </div>-->
         <div class="form-group">
             <label for="DNI">DNI Cliente</label>
             <input type="text"  class="form-control" id="DNI" placeholder="DNI Cliente">
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
             <label for="codRes">Codigo de Reserva</label>
             <input type="text" class="form-control" id="codRes" placeholder="Codigo de Reserva">
-        </div>
+        </div>-->
         <div class="form-group">
             <label for="fecRes">Fecha de Reserva</label>
-            <input type="date"  class="form-control" id="fecRes" placeholder="Fecha de Reserva">
+            <input ng-model="registrarReserva.nuevaReserva.FechaReserva" type="text"  class="form-control" id="fecRes" placeholder="Fecha de Reserva">
         </div>
         <div class="form-group">
             <label for="idVendedor">Id de Vendedor</label>
-            <input type="text" class="form-control" id="idVendedor" placeholder="idVendedor">
+            <input ng-model="registrarReserva.nuevaReserva.IdVendedor" type="text" class="form-control" id="idVendedor" placeholder="idVendedor">
         </div>
         <div class="form-group">
             <label for="idCliente">Id del Cliente</label>
-            <input type="text" class="form-control" id="idCliente" placeholder="idCliente">
+            <input ng-model="registrarReserva.nuevaReserva.IdCliente" type="text" class="form-control" id="idCliente" placeholder="idCliente">
+        </div>
+        <div class="form-group">
+            <label for="idCiudad">Id Ciudad</label>
+            <input ng-model="registrarReserva.nuevaReserva.IdCiudad" type="text" class="form-control" id="idCiudad" placeholder="idCiudad">
+        </div>
+        <div class="form-group">
+            <label for="idPais">Id Pais</label>
+            <input ng-model="registrarReserva.nuevaReserva.IdPais" type="text" class="form-control" id="idPais" placeholder="idPais">
         </div>
         <div class="form-group">
             <label for="costo">Costo</label>
-            <input type="text"  class="form-control" id="costo" placeholder="Costo">
+            <input ng-model="registrarReserva.nuevaReserva.Costo" type="text"  class="form-control" id="costo" placeholder="Costo">
         </div>
         <div class="form-group">
             <label for="preVenta">Precio de venta</label>
-            <input type="text" class="form-control" id="preVenta" placeholder="Precio de venta">
+            <input ng-model="registrarReserva.nuevaReserva.PrecioVenta" type="text" class="form-control" id="preVenta" placeholder="Precio de venta">
         </div>
-        <button type="button" class="btn btn-primary">Registrar Reserva</button>
+        <button ng-click="registrarReserva.save()" type="button" class="btn btn-primary">Registrar Reserva</button>
 
     </div>
 </div>

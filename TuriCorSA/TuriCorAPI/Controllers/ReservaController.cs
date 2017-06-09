@@ -9,7 +9,7 @@ using TuriCorAPI.Models;
 using AuthorizationServer.App_Start;
 namespace TuriCorAPI.Controllers
 {
-    [EnableCors(origins: "http://localhost:8660", headers: "*", methods: "*")]
+   
     //[Scope("read")]
     public class ReservaController : ApiController
     {
@@ -80,11 +80,26 @@ namespace TuriCorAPI.Controllers
             }
         }
 
-        public IHttpActionResult Post([FromBody]Reserva res)
+        public IHttpActionResult Post([FromBody]Reserva res, DateTime fechaDev, DateTime fechaRet)
         {
             try
             {
                 var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
+
+                var reserva = cliente.ReservarVehiculo(new ServiceReferenceReservaVehiculos.ReservarVehiculoRequest()
+                {
+                    ApellidoNombreCliente = res.Cliente.Apellido + " " + res.Cliente.Nombre,
+
+                    FechaHoraDevolucion = fechaDev,
+                    FechaHoraRetiro =fechaRet,
+                    IdVehiculoCiudad = res.IdVehiculoCiudad,
+                    //LugarDevolucion =,
+                    //LugarRetiro =,
+                    NroDocumentoCliente = res.Cliente.NroDocumento,
+
+                });
+
+                res.CodigoReserva = reserva.Reserva.CodigoReserva;
 
                 if (_db.Reserva == null || !_db.Reserva.Any())
                 {
@@ -99,17 +114,7 @@ namespace TuriCorAPI.Controllers
 
                 _db.SaveChanges();
 
-                var reserva = cliente.ReservarVehiculo(new ServiceReferenceReservaVehiculos.ReservarVehiculoRequest()
-                {
-                   ApellidoNombreCliente = res.Cliente.Apellido +" "+ res.Cliente.Nombre,
-            
-                   //FechaHoraDevolucion = res.
-                   //FechaHoraRetiro =.
-                   IdVehiculoCiudad = res.IdVehiculoCiudad,
-                   //LugarDevolucion =,
-                   //LugarRetiro =,
-                   NroDocumentoCliente = res.Cliente.NroDocumento,
-                });
+               
 
                 return Created("api/Reserva/" + res.Id, res);
 

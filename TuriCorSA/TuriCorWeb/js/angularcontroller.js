@@ -187,17 +187,20 @@
 
     }).controller('nuevareservasController', function ($http, $window) {
         var nuevareservasController = this;
+        nuevareservasController.title = 'Registrar Nueva Reserva';
         nuevareservasController.nuevaReserva = {};
+        nuevareservasController.nuevaReserva.FechaReserva = moment().format('YYYY-MM-DD');
         nuevareservasController.save = function () {
             $http({
-                method: 'Post',
-                url: 'http://localhost:31172/api/Cliente',
+                method: 'POST',
+                url: 'http://localhost:2253/api/reserva',
                 data: nuevareservasController.nuevaReserva,
                 headers: {
                     'Accept': "application/json"
                 }
             }).then(function (response) {
-                $window.location = "#/clientes";
+               // $window.location = "#/clientes";
+                alert('Exito');
             }, function (response) {
                 alert("Error");
             }).then(function () {

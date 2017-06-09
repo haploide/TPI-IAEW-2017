@@ -286,3 +286,7 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/TuriCorSA/TuriCorAPI/Scripts/moment-with-locales.js
+/TuriCorSA/TuriCorAPI/Scripts/moment-with-locales.min.js
+/TuriCorSA/TuriCorAPI/Scripts/moment.js
+/TuriCorSA/TuriCorAPI/Scripts/moment.min.js
