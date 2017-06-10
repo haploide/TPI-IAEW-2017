@@ -34,6 +34,12 @@
         vehiculosController.ciudades = [];
         vehiculosController.nuevareserva = function (vehi) {
             reserva.FechaDesde = $scope.fechaDesde;
+            reserva.FechaHasta = $scope.fechaHasta;
+            reserva.IdVehiculoCiudad = vehi.VehiculoCiudadId;
+            reserva.IdCiudad = vehiculosController.ciudadSeleccionada;
+            reserva.Costo = (vehi.PrecioPorDia*100)/120;
+            //reserva.IdPais=
+            reserva.PrecioVenta = vehi.PrecioPorDia;
 
             $location.url('/nuevareserva');
             
@@ -219,8 +225,7 @@
         var nuevareservasController = this;
         nuevareservasController.title = 'Registrar Nueva Reserva';
         nuevareservasController.nuevaReserva = reserva;
-        //nuevareservasController.nuevaReserva.FechaReserva = ;
-       
+        
         nuevareservasController.save = function () {
             $http({
                 method: 'POST',

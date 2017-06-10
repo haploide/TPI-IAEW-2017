@@ -190,6 +190,7 @@
     <Compile Include="Models\Reserva.cs">
       <DependentUpon>ModelTuriCorSA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SuperReserva.cs" />
     <Compile Include="Models\Vendedor.cs">
       <DependentUpon>ModelTuriCorSA.tt</DependentUpon>
     </Compile>
