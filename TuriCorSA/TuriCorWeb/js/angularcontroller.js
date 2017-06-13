@@ -33,8 +33,8 @@
         vehiculosController.paises = [];
         vehiculosController.ciudades = [];
         vehiculosController.nuevareserva = function (vehi) {
-            reserva.FechaDesde = $scope.fechaDesde;
-            reserva.FechaHasta = $scope.fechaHasta;
+            reserva.FechaHoraRetiro = $scope.fechaDesde;
+            reserva.FechaHoraDevolucion = $scope.fechaHasta;
             reserva.IdVehiculoCiudad = vehi.VehiculoCiudadId;
             reserva.IdCiudad = vehiculosController.ciudadSeleccionada;
             reserva.Costo = (vehi.PrecioPorDia*100)/120;
@@ -132,8 +132,7 @@
             vehiculosController.ciudadSeleccionada = '';
 
         }
-        
-        
+       
 
     }).controller('reservasController', function ($http, $scope) {
         var reservasController = this;
@@ -224,8 +223,14 @@
     }).controller('nuevareservasController', function ($http, $scope, reserva) {
         var nuevareservasController = this;
         nuevareservasController.title = 'Registrar Nueva Reserva';
+        nuevareservasController.LugaresRetiroDevolucion = [{ 'Id': 0, 'Nombre': 'Aeropuerto' }, { 'Id': 1, 'Nombre': 'Terminal de Buses' }, { 'id': 2, 'Nombre': 'Hotel' }]
         nuevareservasController.nuevaReserva = reserva;
-        
+        nuevareservasController.selectRetiro = function (nombre) {
+            reserva.LugarRetiro = nombre;
+        };
+        nuevareservasController.selectDevolucion = function (nombre) {
+            reserva.LugarDevolucion = nombre;
+        };
         nuevareservasController.save = function () {
             $http({
                 method: 'POST',
