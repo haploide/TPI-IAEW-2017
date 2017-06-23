@@ -8,6 +8,8 @@ using System.Web.Http.Cors;
 using TuriCorAPI.Models;
 using AuthorizationServer.App_Start;
 using TuriCorAPI.ServiceReferenceReservaVehiculos;
+using System.Data.Entity.Validation;
+using System.Data.Entity.Infrastructure;
 
 namespace TuriCorAPI.Controllers
 {
@@ -84,48 +86,61 @@ namespace TuriCorAPI.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]SuperReserva res)
         {
-            //try
-            //{
-            //    var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
+            try
+            {
+                //var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
 
-            //    var reserva = cliente.ReservarVehiculo(new ServiceReferenceReservaVehiculos.ReservarVehiculoRequest()
-            //    {
-            //ApellidoNombreCliente = res.Cliente.Apellido + " " + res.Cliente.Nombre,
-            //FechaHoraDevolucion = fechaDev,
-            //FechaHoraRetiro =fechaRet,
-            //IdVehiculoCiudad = res.IdVehiculoCiudad,
-            //LugarDevolucion =,
-            //LugarRetiro =,
-            //NroDocumentoCliente = res.Cliente.NroDocumento,
+                //var reserva = cliente.ReservarVehiculo(new ServiceReferenceReservaVehiculos.ReservarVehiculoRequest()
+                //{
+                //    ApellidoNombreCliente = res.ApellidoNombreCliente,
+                //    FechaHoraDevolucion = res.FechaHoraDevolucion,
+                //    FechaHoraRetiro =res.FechaHoraRetiro,
+                //    IdVehiculoCiudad = res.IdVehiculoCiudad,
+                //    LugarDevolucion =(LugarRetiroDevolucion)Enum.Parse(typeof(LugarRetiroDevolucion), res.LugarDevolucion),
+                //    LugarRetiro = (LugarRetiroDevolucion)Enum.Parse(typeof(LugarRetiroDevolucion), res.LugarRetiro),
+                //    NroDocumentoCliente = res.NroDocumentoCliente,
+                    
+                //});
+
+                
+            Reserva reser= new Reserva()
+            {
+                //CodigoReserva = reserva.Reserva.CodigoReserva,
+                CodigoReserva = "EUVMH",
+                FechaReserva = res.FechaReserva, 
+                IdCliente= res.IdCliente,
+                IdVendedor= res.IdVendedor,
+                Costo= res.Costo,
+                PrecioVenta=res.PrecioVenta,
+                IdVehiculoCiudad=res.IdVehiculoCiudad,
+                IdCiudad= res.IdCiudad, 
+                IdPais = res.IdPais
 
 
-            //});
+            };
 
-            // res.CodigoReserva = reserva.Reserva.CodigoReserva;
-
-            //if (_db.Reserva == null || !_db.Reserva.Any())
-            //{
+            if (_db.Reserva == null || !_db.Reserva.Any())
+            {
                return NotFound();
-            //}
-            //if (res == null)
-            //{
-            //    return BadRequest();
-            //}
+            }
+            if (res == null)
+            {
+                return BadRequest();
+            }
 
-            //_db.Reserva.Add(res);
+            _db.Reserva.Add(reser);
 
-            //_db.SaveChanges();
+            _db.SaveChanges();
+                
 
+            return Created("api/Reserva/" + reser.Id, reser);
 
+            }
+            catch (Exception ex)
+            {
 
-            //return Created("api/Reserva/" + res.Id, res);
-
-            //}
-            //catch (Exception ex)
-            //{
-
-           // return InternalServerError(ex);
-            //}
+            return InternalServerError(ex);
+            }
         }
 
         public IHttpActionResult Put(int id, [FromBody]Reserva res)
