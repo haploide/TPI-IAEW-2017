@@ -38,15 +38,16 @@
             reserva.IdVehiculoCiudad = vehi.VehiculoCiudadId;
             reserva.IdCiudad = vehiculosController.ciudadSeleccionada;
             reserva.Costo = (vehi.PrecioPorDia*100)/120;
-            //reserva.IdPais=
+            reserva.IdPais = vehiculosController.PaisSeleccionado;
             reserva.PrecioVenta = vehi.PrecioPorDia;
 
             $location.url('/nuevareserva');
             
         }
-        vehiculosController.seleccionarCiudad=function (id) {
+        vehiculosController.seleccionarCiudad = function (id) {
             vehiculosController.ciudadSeleccionada = id;
         };
+       
         
         vehiculosController.buscarVehiculos = function () {
             vehiculosController.isBusy = true;
@@ -86,9 +87,11 @@
         vehiculosController.buscarCiudades = function (pais) {
             //alert(pais);
             vehiculosController.isBusy = true;
+            vehiculosController.PaisSeleccionado = pais.Id;
             $http({
                 method: 'GET',
-                url: 'http://localhost:2253/api/ciudad?id='+pais.Id,
+                url: 'http://localhost:2253/api/ciudad?id=' + pais.Id,
+
                 headers: {
                     'Accept': "application/json"
                 }
