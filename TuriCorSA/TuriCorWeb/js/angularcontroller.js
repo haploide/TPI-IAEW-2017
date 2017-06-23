@@ -38,15 +38,16 @@
             reserva.IdVehiculoCiudad = vehi.VehiculoCiudadId;
             reserva.IdCiudad = vehiculosController.ciudadSeleccionada;
             reserva.Costo = (vehi.PrecioPorDia*100)/120;
-            //reserva.IdPais=
+            reserva.IdPais = vehiculosController.PaisSeleccionado;
             reserva.PrecioVenta = vehi.PrecioPorDia;
 
             $location.url('/nuevareserva');
             
         }
-        vehiculosController.seleccionarCiudad=function (id) {
+        vehiculosController.seleccionarCiudad = function (id) {
             vehiculosController.ciudadSeleccionada = id;
         };
+       
         
         vehiculosController.buscarVehiculos = function () {
             vehiculosController.isBusy = true;
@@ -86,9 +87,11 @@
         vehiculosController.buscarCiudades = function (pais) {
             //alert(pais);
             vehiculosController.isBusy = true;
+            vehiculosController.PaisSeleccionado = pais.Id;
             $http({
                 method: 'GET',
-                url: 'http://localhost:2253/api/ciudad?id='+pais.Id,
+                url: 'http://localhost:2253/api/ciudad?id=' + pais.Id,
+
                 headers: {
                     'Accept': "application/json"
                 }
@@ -225,31 +228,52 @@
         nuevareservasController.title = 'Registrar Nueva Reserva';
         nuevareservasController.LugaresRetiroDevolucion = [{ 'Id': 0, 'Nombre': 'Aeropuerto' }, { 'Id': 1, 'Nombre': 'Terminal de Buses' }, { 'id': 2, 'Nombre': 'Hotel' }]
         nuevareservasController.nuevaReserva = reserva;
-        nuevareservasController.selectRetiro = function (nombre) {
-            reserva.LugarRetiro = nombre;
-        };
-        nuevareservasController.selectDevolucion = function (nombre) {
-            reserva.LugarDevolucion = nombre;
-        };
-        nuevareservasController.save = function () {
+      
+       
+        nuevareservasController.buscarCliente = function (id) {
+            
             $http({
-                method: 'POST',
-                url: 'http://localhost:2253/api/reserva',
-                data: nuevareservasController.nuevaReserva,
+                method: 'GET',
+                url: 'http://localhost:2253/api/Cliente?id=' + id,
+
                 headers: {
                     'Accept': "application/json"
                 }
             }).then(function (response) {
-               // $window.location = "#/clientes";
-                alert('Exito');
-            }, function (response) {
+                angular.copy(response.data, nuevareservasController.Cliente);
+
+
+            }, function(response){
                 alert("Error");
             }).then(function () {
 
             });
         };
+            nuevareservasController.selectRetiro = function (nombre) {
+                reserva.LugarRetiro = nombre;
+            };
+            nuevareservasController.selectDevolucion = function (nombre) {
+                reserva.LugarDevolucion = nombre;
+            };
+            nuevareservasController.save = function () {
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:2253/api/reserva',
+                    data: nuevareservasController.nuevaReserva,
+                    headers: {
+                        'Accept': "application/json"
+                    }
+                }).then(function (response) {
+                    // $window.location = "#/clientes";
+                    alert('Exito');
+                }, function (response) {
+                    alert("Error");
+                }).then(function () {
 
-    });
+                });
+            };
+
+        });
 
 
 
