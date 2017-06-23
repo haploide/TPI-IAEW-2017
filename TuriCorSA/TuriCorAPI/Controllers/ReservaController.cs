@@ -10,6 +10,7 @@ using AuthorizationServer.App_Start;
 using TuriCorAPI.ServiceReferenceReservaVehiculos;
 using System.Data.Entity.Validation;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Core;
 
 namespace TuriCorAPI.Controllers
 {
@@ -182,36 +183,29 @@ namespace TuriCorAPI.Controllers
         {
             try
             {
-                var res = _db.Reserva;
+                var res = _db.Reserva.Find(id);
                 if (res == null)
                 {
                     return NotFound();
                 }
-                foreach (var r in res)
-                {
-                    if (r.Id  == id)
-                    {
-                        var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
+                //var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
                         
-                        _db.Reserva.Remove(r);
+                _db.Reserva.Remove(res);
 
-                        _db.SaveChanges();
+                _db.SaveChanges();
 
-                        var reserva = cliente.CancelarReserva(new ServiceReferenceReservaVehiculos.CancelarReservaRequest()
-                        {
-                            CodigoReserva = r.CodigoReserva 
-                        });
+                //var reserva = cliente.CancelarReserva(new ServiceReferenceReservaVehiculos.CancelarReservaRequest()
+                //{
+                //    CodigoReserva = res.CodigoReserva 
+                //});
+                
+                return Ok(res);
 
+            }
+            catch (EntityException ex)
+            {
 
-                        return Ok(r);
-
-                    }            
-                }
-
-                return Ok();
-
-
-
+                return InternalServerError(ex);
             }
             catch (Exception ex)
             {

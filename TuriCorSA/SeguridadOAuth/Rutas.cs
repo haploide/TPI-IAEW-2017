@@ -8,14 +8,14 @@ namespace SeguridadOAuth
 {
     public static class Rutas
     {
-        public const string AuthorizationServerBaseAddress = "http://localhost:11625";
+        public const string AuthorizationServerBaseAddress = "http://104.198.185.19:8080";
 
-        public const string ResourceServerBaseAddress = "http://localhost:38385";
+        public const string ResourceServerBaseAddress = "http://localhost:2253/";
 
-        public const string AuthorizeCodeCallBackPath = "http://localhost:38500/";
+        public const string AuthorizeCodeCallBackPath = "http://localhost:8660/";
 
-        public const string AuthorizePath = "/OAuth/Authorize";
-        public const string TokenPath = "/OAuth/Token";
+        public const string AuthorizePath = "openam/oauth2/authorize";
+        public const string TokenPath = "openam/oauth2/access_token";
         public const string LoginPath = "/Account/Login";
         public const string LogoutPath = "/Account/Logout";
         public const string MePath = "/api/Me";
