@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using TuriCorWeb.Models;
+using Microsoft.Owin.Security.OAuth;
 
 namespace TuriCorWeb
 {
@@ -63,6 +64,8 @@ namespace TuriCorWeb
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TuriCorWeb.Models;
+using SeguridadOAuth;
 
 namespace TuriCorWeb.Controllers
 {
@@ -402,7 +403,23 @@ namespace TuriCorWeb.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
+        public ActionResult LoginOAuth()
+        {
+            string client_id=Credencial.cliente.Id;
+            string scope="read";
+            string state = "8268745";
+            string redirect_uri=Rutas.AuthorizeCodeCallBackPath;
+            string response_type = "code";
+            string url = Rutas.AuthorizationServerBaseAddress+Rutas.AuthorizePath+ "?client_id="+ client_id;
+            url += "&scope=" + scope + "&state ="+state +"&redirect_uri=" + redirect_uri + "&response_type=" + response_type;
+            return Redirect(url);
+        }
+        //public ActionResult CallBack()
+        //{
 
+        //}
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

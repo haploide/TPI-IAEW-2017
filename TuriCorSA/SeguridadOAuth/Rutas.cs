@@ -12,12 +12,10 @@ namespace SeguridadOAuth
 
         public const string ResourceServerBaseAddress = "http://localhost:2253/";
 
-        public const string AuthorizeCodeCallBackPath = "http://localhost:8660/";
+        public const string AuthorizeCodeCallBackPath = "http://localhost:8660/Account/CallBack";
 
-        public const string AuthorizePath = "openam/oauth2/authorize";
-        public const string TokenPath = "openam/oauth2/access_token";
-        public const string LoginPath = "/Account/Login";
-        public const string LogoutPath = "/Account/Logout";
+        public const string AuthorizePath = "/openam/oauth2/authorize";
+        public const string TokenPath = "/openam/oauth2/access_token";
         public const string MePath = "/api/Me";
     }
 }

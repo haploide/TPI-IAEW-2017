@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DotNetOpenAuth.OAuth2;
+using SeguridadOAuth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,10 @@ namespace TuriCorWeb.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
+           return View();
         }
 
         public ActionResult About()
@@ -26,5 +29,7 @@ namespace TuriCorWeb.Controllers
 
             return View();
         }
+
+        
     }
 }
