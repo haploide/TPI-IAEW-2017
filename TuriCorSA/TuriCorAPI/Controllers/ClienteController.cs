@@ -11,7 +11,7 @@ using AuthorizationServer.App_Start;
 namespace TuriCorAPI.Controllers
 {
     [EnableCors(origins: "http://localhost:8660", headers: "*", methods: "*")]
-    [Scope("read")]
+    //[Scope("read")]
     public class ClienteController : ApiController
     {
         private TuricorEntities _db = new TuricorEntities();

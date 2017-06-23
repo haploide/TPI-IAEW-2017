@@ -56,6 +56,12 @@
             <div class="form-group">
                 <label for="idCliente">Id del Cliente</label>
                 <input required ng-model="registrarReserva.nuevaReserva.IdCliente" type="text" class="form-control" id="idCliente" placeholder="idCliente">
+
+                <button type="button" class="btn btn-default" ng-click="registrarReserva.buscarCliente(registrarReserva.nuevaReserva.IdCliente)">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+
+            
             </div>
             <div class="form-group">
                 <label for="idCiudad">Id Ciudad</label>
@@ -74,6 +80,8 @@
                 <input required ng-model="registrarReserva.nuevaReserva.PrecioVenta" type="text" class="form-control" id="preVenta" placeholder="Precio de venta">
             </div>
         </div>
+      
+
             <button ng-click="registrarReserva.save()" type="button" class="btn btn-primary" ng-disabled="formnuevareserva.$invalid">Registrar Reserva</button>
 
     </form>
