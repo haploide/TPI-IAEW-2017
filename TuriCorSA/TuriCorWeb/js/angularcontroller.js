@@ -157,11 +157,13 @@
             }).then(function (response) {
                 // $window.location = "#/clientes";
                 alert('Exito');
+                reservasController.buscarReservas();
             }, function (response) {
                 alert("Error");
             }).then(function () {
 
             });
+            
         };
         reservasController.buscarReservas = function () {
             reservasController.isBusy = true;
@@ -222,14 +224,15 @@
 
             });
         }
+        reservasController.buscarReservas();
 
     }).controller('nuevareservasController', function ($http, $scope, reserva) {
         var nuevareservasController = this;
         nuevareservasController.title = 'Registrar Nueva Reserva';
-        nuevareservasController.LugaresRetiroDevolucion = [{ 'Id': 0, 'Nombre': 'Aeropuerto' }, { 'Id': 1, 'Nombre': 'Terminal de Buses' }, { 'id': 2, 'Nombre': 'Hotel' }]
+        nuevareservasController.LugaresRetiroDevolucion = [{ 'Id': 0, 'Nombre': 'Aeropuerto' }, { 'Id': 1, 'Nombre': 'TerminalBuses' }, { 'id': 2, 'Nombre': 'Hotel' }]
         nuevareservasController.nuevaReserva = reserva;
-      
-       
+        
+              
         nuevareservasController.buscarCliente = function (id) {
             
             $http({
@@ -240,8 +243,9 @@
                     'Accept': "application/json"
                 }
             }).then(function (response) {
-                angular.copy(response.data, nuevareservasController.Cliente);
-
+                
+                reserva.ApellidoNombreCliente = response.data.Nombre +' '+ response.data.Apellido;
+                reserva.NroDocumentoCliente = response.data.NroDocumento;
 
             }, function(response){
                 alert("Error");
@@ -264,8 +268,9 @@
                         'Accept': "application/json"
                     }
                 }).then(function (response) {
-                    // $window.location = "#/clientes";
-                    alert('Exito');
+                    alert('Reserva Registrada');
+                    window.location.href = "#!/listarreservas";
+                    
                 }, function (response) {
                     alert("Error");
                 }).then(function () {

@@ -89,25 +89,25 @@ namespace TuriCorAPI.Controllers
         {
             try
             {
-                //var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
+                var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
 
-                //var reserva = cliente.ReservarVehiculo(new ServiceReferenceReservaVehiculos.ReservarVehiculoRequest()
-                //{
-                //    ApellidoNombreCliente = res.ApellidoNombreCliente,
-                //    FechaHoraDevolucion = res.FechaHoraDevolucion,
-                //    FechaHoraRetiro =res.FechaHoraRetiro,
-                //    IdVehiculoCiudad = res.IdVehiculoCiudad,
-                //    LugarDevolucion =(LugarRetiroDevolucion)Enum.Parse(typeof(LugarRetiroDevolucion), res.LugarDevolucion),
-                //    LugarRetiro = (LugarRetiroDevolucion)Enum.Parse(typeof(LugarRetiroDevolucion), res.LugarRetiro),
-                //    NroDocumentoCliente = res.NroDocumentoCliente,
-                    
-                //});
+                var reserva = cliente.ReservarVehiculo(new ServiceReferenceReservaVehiculos.ReservarVehiculoRequest()
+                {
+                    ApellidoNombreCliente = res.ApellidoNombreCliente,
+                    FechaHoraDevolucion = res.FechaHoraDevolucion,
+                    FechaHoraRetiro = res.FechaHoraRetiro,
+                    IdVehiculoCiudad = res.IdVehiculoCiudad,
+                    LugarDevolucion = (LugarRetiroDevolucion)Enum.Parse(typeof(LugarRetiroDevolucion), res.LugarDevolucion),
+                    LugarRetiro = (LugarRetiroDevolucion)Enum.Parse(typeof(LugarRetiroDevolucion), res.LugarRetiro),
+                    NroDocumentoCliente = res.NroDocumentoCliente,
 
-                
-            Reserva reser= new Reserva()
+                });
+
+
+                Reserva reser= new Reserva()
             {
-                //CodigoReserva = reserva.Reserva.CodigoReserva,
-                CodigoReserva = "EUVMH",
+                CodigoReserva = reserva.Reserva.CodigoReserva,
+                //CodigoReserva = "EUVMH",
                 FechaReserva = res.FechaReserva, 
                 IdCliente= res.IdCliente,
                 IdVendedor= res.IdVendedor,
@@ -188,16 +188,16 @@ namespace TuriCorAPI.Controllers
                 {
                     return NotFound();
                 }
-                //var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
+                var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
                         
                 _db.Reserva.Remove(res);
 
                 _db.SaveChanges();
 
-                //var reserva = cliente.CancelarReserva(new ServiceReferenceReservaVehiculos.CancelarReservaRequest()
-                //{
-                //    CodigoReserva = res.CodigoReserva 
-                //});
+                var reserva = cliente.CancelarReserva(new ServiceReferenceReservaVehiculos.CancelarReservaRequest()
+                {
+                    CodigoReserva = res.CodigoReserva 
+                });
                 
                 return Ok(res);
 
