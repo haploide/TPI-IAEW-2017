@@ -53,7 +53,7 @@
             vehiculosController.isBusy = true;
             $http({
                 method: 'GET',
-                url: 'http://localhost:2253/api/vehiculo?Id=' + vehiculosController.ciudadSeleccionada + '&fechaHoraRetiro=' + $scope.fechaDesde + '&fechaHoraDevolucion=' + $scope.fechaHasta,
+                url: 'http://localhost:2253/api/vehiculo?Id=' + vehiculosController.ciudadSeleccionada + '&fechaHoraRetiro=' + $scope.fechaHasta + '&fechaHoraDevolucion=' + $scope.fechaDesde,
                 headers: {
                     'Accept': "application/json"
                 }

@@ -1,0 +1,16 @@
+﻿@using SeguridadOAuth
+
+
+
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    var url = '@(Rutas.AuthorizationServerBaseAddress+Rutas.TokenPath)?client_id=@(Credencial.cliente.Id)&client_secret=@(Credencial.cliente.Secret)&redirect_uri=@(Rutas.AuthorizeCodeCallBackPath)&grant_type=authorization_code&state=8268745&code=@(ViewBag.Code)';
+
+    var result = $.post(url);
+    
+    alert(result);
+       
+});
+</script>

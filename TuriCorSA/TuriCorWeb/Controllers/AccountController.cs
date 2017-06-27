@@ -415,10 +415,15 @@ namespace TuriCorWeb.Controllers
             url += "&scope=" + scope + "&state ="+state +"&redirect_uri=" + redirect_uri + "&response_type=" + response_type;
             return Redirect(url);
         }
-        //public ActionResult CallBack()
-        //{
+        [AllowAnonymous]
+        public ActionResult CallBack(string code, string state ,string scope)
+        {
+            ViewBag.Code = code;
+            ViewBag.State = state;
+            ViewBag.Scope = scope;
 
-        //}
+            return View();
+        }
         
         protected override void Dispose(bool disposing)
         {
