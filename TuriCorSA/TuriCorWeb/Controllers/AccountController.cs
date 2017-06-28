@@ -10,6 +10,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TuriCorWeb.Models;
 using SeguridadOAuth;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace TuriCorWeb.Controllers
 {
@@ -418,9 +421,41 @@ namespace TuriCorWeb.Controllers
         [AllowAnonymous]
         public ActionResult CallBack(string code, string state ,string scope)
         {
-            ViewBag.Code = code;
-            ViewBag.State = state;
-            ViewBag.Scope = scope;
+            try
+            {
+                var req = WebRequest.Create(Rutas.AuthorizationServerBaseAddress + Rutas.TokenPath + "?client_id =" + Credencial.cliente.Id + "&client_secret =" + Credencial.cliente.Secret + "&redirect_uri =" + Rutas.AuthorizeCodeCallBackPath + "&grant_type=authorization_code&state=8268745&code=" + code);
+
+                req.Method = "POST";
+
+                req.ContentType = "application/x-www-form-urlencoded";
+
+                //using (var streamWriter = new StreamWriter(req.GetRequestStream()))
+                //{
+                //    streamWriter.Write("grant_type=authorization_code");
+                //    streamWriter.Flush();
+                //    streamWriter.Close();
+                //}
+                Stream newStream = req.GetRequestStream();
+                
+                newStream.Write("grant_type=authorization_code".tob, 0,28);
+                newStream.Close();
+
+                var resp = req.GetResponse() as HttpWebResponse;
+            }
+            catch (WebException ex)
+            {
+
+                throw;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            //ViewBag.Code = code;
+            //ViewBag.State = state;
+            //ViewBag.Scope = scope;
 
             return View();
         }
