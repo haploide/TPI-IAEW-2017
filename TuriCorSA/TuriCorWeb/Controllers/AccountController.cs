@@ -13,6 +13,7 @@ using SeguridadOAuth;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace TuriCorWeb.Controllers
 {
@@ -423,24 +424,50 @@ namespace TuriCorWeb.Controllers
         {
             try
             {
-                var req = WebRequest.Create(Rutas.AuthorizationServerBaseAddress + Rutas.TokenPath + "?client_id =" + Credencial.cliente.Id + "&client_secret =" + Credencial.cliente.Secret + "&redirect_uri =" + Rutas.AuthorizeCodeCallBackPath + "&grant_type=authorization_code&state=8268745&code=" + code);
+                Token nuevoToken;
+                //var req = WebRequest.Create(Rutas.AuthorizationServerBaseAddress + Rutas.TokenPath + "?client_id =" + Credencial.cliente.Id + "&client_secret =" + Credencial.cliente.Secret + "&redirect_uri =" + Rutas.AuthorizeCodeCallBackPath + "&grant_type=authorization_code&state=8268745&code=" + code);
+                var req = (HttpWebRequest)WebRequest.Create(Rutas.AuthorizationServerBaseAddress + Rutas.TokenPath);
+
+                var postData = "client_id=" + Credencial.cliente.Id;
+                postData += "&client_secret=" + Credencial.cliente.Secret;
+                postData += "&redirect_uri=" + Rutas.AuthorizeCodeCallBackPath;
+                postData += "&grant_type=authorization_code";
+                postData += "&state=8268745";
+                postData += "&code=" + code;
+
+                var data = Encoding.ASCII.GetBytes(postData);
 
                 req.Method = "POST";
+                req.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(Credencial.cliente.Id+":"+Credencial.cliente.Secret)));
+                req.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+                req.ContentLength = data.Length;
 
-                req.ContentType = "application/x-www-form-urlencoded";
+                using (var stream = req.GetRequestStream())
+                {
+                    stream.Write(data, 0, data.Length);
+                }
 
-                //using (var streamWriter = new StreamWriter(req.GetRequestStream()))
-                //{
-                //    streamWriter.Write("grant_type=authorization_code");
-                //    streamWriter.Flush();
-                //    streamWriter.Close();
-                //}
-                Stream newStream = req.GetRequestStream();
-                
-                newStream.Write("grant_type=authorization_code".tob, 0,28);
-                newStream.Close();
+                var resp = (HttpWebResponse)req.GetResponse();
 
-                var resp = req.GetResponse() as HttpWebResponse;
+                if (resp != null && resp.StatusCode == HttpStatusCode.OK)
+                {
+                    using (var respStream = resp.GetResponseStream())
+                    {
+                        if (respStream != null)
+                        {
+                            var reader = new StreamReader(respStream, Encoding.UTF8);
+                            string result = reader.ReadToEnd();
+
+                            
+                            nuevoToken = JsonConvert.DeserializeObject<Token>(result);
+
+                            this.Session["Token"] = nuevoToken;
+                        }
+                    }
+                }
+
+
+
             }
             catch (WebException ex)
             {
@@ -453,11 +480,7 @@ namespace TuriCorWeb.Controllers
                 throw;
             }
 
-            //ViewBag.Code = code;
-            //ViewBag.State = state;
-            //ViewBag.Scope = scope;
-
-            return View();
+             return View();
         }
         
         protected override void Dispose(bool disposing)
