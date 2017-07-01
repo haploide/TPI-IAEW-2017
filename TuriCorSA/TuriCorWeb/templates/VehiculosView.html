@@ -1,85 +1,99 @@
 ﻿<div>
     <div class="jumbotron">
-        <h1>{{ vehiculosList.title }}</h1>
-        <p class="lead">Listado de Vehiculos</p>
-        <!--<p><a href="#/newcliente" class="btn btn-primary">Nuevo Cliente</a></p>-->
+        <div class="container">
+            <h1>{{ vehiculosList.title }}</h1>
+            <p class="lead">Listado de Vehiculos</p>
+        </div>
+
     </div>
-    <form class="form-horizontal" name="listadoVehiculosForm" novalidate>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="cmbPais">Pais:</label>
-                <select class="form-control" id="cmbPais" required >
-                    <option disabled selected>Seleccione...</option>
-                    <option ng-repeat="pais in vehiculosList.paises" ng-click="vehiculosList.buscarCiudades(pais)">{{pais.Nombre}}</option>
-                </select>
-</div>
-            <div class="form-group">
-                <label for="datepickerHasta">Fecha Hasta:</label>
-                <input type="text" required id="datepickerHasta" ng-model="fechaHasta" ng-minlength="10" placeholder="yyyy-mm-dd">
-                
+
+    <div class="container">
+        <form class="form" name="listadoVehiculosForm" novalidate>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cmbPais">Pais:</label>
+                        <select class="form-control" id="cmbPais" required>
+                            <option disabled selected>Seleccione...</option>
+                            <option ng-repeat="pais in vehiculosList.paises" ng-click="vehiculosList.buscarCiudades(pais)">{{pais.Nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="datepickerDesde">Fecha Desde:</label>
+                        <input type="text" id="datepickerDesde" required ng-model="fechaDesde" ng-minlength="10" placeholder="yyyy-mm-dd">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cmbCiudad">Ciudad:</label>
+                        <select id="cmbCiudad" class="form-control" required disabled>
+                            <option disabled selected>Seleccione...</option>
+                            <option ng-repeat="ciudad in vehiculosList.ciudades" ng-click="vehiculosList.seleccionarCiudad(ciudad.Id)">{{ciudad.Nombre}}</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="datepickerHasta">Fecha Hasta:</label>
+                        <input type="text" required id="datepickerHasta" ng-model="fechaHasta" ng-minlength="10" placeholder="yyyy-mm-dd">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary" ng-disabled="listadoVehiculosForm.$invalid" ng-click="vehiculosList.buscarVehiculos()">Buscar</button>
+                    <button type="submit" class="btn btn-primary" ng-click="vehiculosList.limpiar()">Limpiar</button>
+                </div>
+            </div>
+        </form>
+
+
+        <div>
+            <div data-ng-show="isBusy">PROCESANDO....</div>
+        </div>
+        <div class="row">
+            <br />
+            <div class="col-md-12">
+                <table class="table">
+                    <tr>
+
+                        <th ng-hide="true">Id</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Precio por Dia</th>
+                        <th>Puntaje</th>
+                        <th>Aire Acondicionado</th>
+                        <th>Direccion</th>
+                        <th>Tipo de Cambio</th>
+                        <th ng-hide="true">VehiculoCiudadId</th>
+                        <th>Cantidad Disponible</th>
+                        <th>Cantidad Puertas</th>
+                        <th>CiudadId</th>
+                    </tr>
+                    <tr class='clickable-row' data-ng-repeat="vehi in vehiculosList.vehiculos | orderBy:'Id'">
+
+                        <th ng-hide="true">{{vehi.Id }}</th>
+                        <th ng-click="vehiculosController.clickeando()">{{vehi.Marca }}</th>
+                        <th>{{vehi.Modelo }}</th>
+                        <th>{{vehi.PrecioPorDia }}</th>
+                        <th>{{vehi.Puntaje }}</th>
+                        <th>{{vehi.TieneAireAcon }}</th>
+                        <th>{{vehi.TieneDireccion }}</th>
+                        <th>{{vehi.TipoCambio }}</th>
+                        <th ng-hide="true">{{vehi.VehiculoCiudadId }}</th>
+                        <th>{{vehi.CantidadDisponible }}</th>
+                        <th>{{vehi.CantidadPuertas }}</th>
+                        <th>{{vehi.CiudadId }}</th>
+                        <th><a class="btn btn-primary" ng-click="vehiculosList.nuevareserva(vehi)">Reservar</a></th>
+
+                    </tr>
+                </table>
+
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="cmbCiudad">Ciudad:</label>
-                <select id="cmbCiudad" class="form-control" required disabled>
-                    <option disabled selected>Seleccione...</option>
-                    <option ng-repeat="ciudad in vehiculosList.ciudades" ng-click="vehiculosList.seleccionarCiudad(ciudad.Id)">{{ciudad.Nombre}}</option>
-                    
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="datepickerDesde">Fecha Desde:</label>
-               <input type="text" id="datepickerDesde" required ng-model="fechaDesde" ng-minlength="10" placeholder="yyyy-mm-dd">
-            </div>
-        </div>
-        
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" ng-disabled="listadoVehiculosForm.$invalid" ng-click="vehiculosList.buscarVehiculos()">Buscar</button>
-                <button type="submit" class="btn btn-primary" ng-click="vehiculosList.limpiar()">Limpiar</button>
-            </div>
-        
-    </form>
-
-    <div>
-        <div data-ng-show="isBusy">PROCESANDO....</div>
-    </div>
-    <div class="col-md-12 row">
-        <table class="table">
-            <tr>
-        
-                <th ng-hide="true">Id</th>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Precio por Dia</th>
-                <th>Puntaje</th>
-                <th>Aire Acondicionado</th>
-                <th>Direccion</th>
-                <th>Tipo de Cambio</th>
-                <th ng-hide="true">VehiculoCiudadId</th>
-                <th>Cantidad Disponible</th>
-                <th>Cantidad Puertas</th>
-                <th>CiudadId</th>
-            </tr>
-            <tr class='clickable-row' data-ng-repeat="vehi in vehiculosList.vehiculos | orderBy:'Id'">
-                
-                <th ng-hide="true">{{vehi.Id }}</th>
-                <th ng-click="vehiculosController.clickeando()">{{vehi.Marca }}</th>
-                <th>{{vehi.Modelo }}</th>
-                <th>{{vehi.PrecioPorDia }}</th>
-                <th>{{vehi.Puntaje }}</th>
-                <th>{{vehi.TieneAireAcon }}</th>
-                <th>{{vehi.TieneDireccion }}</th>
-                <th>{{vehi.TipoCambio }}</th>
-                <th ng-hide="true">{{vehi.VehiculoCiudadId }}</th>
-                <th>{{vehi.CantidadDisponible }}</th>
-                <th>{{vehi.CantidadPuertas }}</th>
-                <th>{{vehi.CiudadId }}</th>
-                <th><a class="btn btn-primary" ng-click="vehiculosList.nuevareserva(vehi)">Reservar</a></th>
-
-            </tr>
-        </table>
-
     </div>
 
 </div>
