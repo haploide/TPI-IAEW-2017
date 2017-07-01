@@ -8,14 +8,14 @@ using TuriCorAPI.ServiceReferenceReservaVehiculos;
 
 namespace TuriCorAPI.Controllers
 {
-     
-    
+
+
     public class VehiculoController : ApiController
     {
         //[Scope("read")]
         public IHttpActionResult Get(int Id, DateTime fechaHoraRetiro, DateTime fechaHoraDevolucion)
         {
-            List<VehiculoModel> listaVehiculos = new  List<VehiculoModel>();
+            List<VehiculoModel> listaVehiculos = new List<VehiculoModel>();
             try
             {
                 var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
@@ -31,10 +31,10 @@ namespace TuriCorAPI.Controllers
                 {
                     return NotFound();
                 }
-                foreach(VehiculoModel ve in vehiculos.VehiculosEncontrados )
+                foreach (VehiculoModel ve in vehiculos.VehiculosEncontrados)
                 {
-                    ve.PrecioPorDia = ve.PrecioPorDia * (decimal)1.20 ;
-                    
+                    ve.PrecioPorDia = ve.PrecioPorDia * (decimal)1.20;
+
                     listaVehiculos.Add(ve);
                 }
 

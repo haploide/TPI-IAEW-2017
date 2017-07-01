@@ -1,41 +1,44 @@
 ﻿<div class="jumbotron">
-    <h1>{{ reservasList.title }}</h1>
-    <p class="lead">Listado de Reservas</p>
+    <div class="container">
+        <h1>{{ reservasList.title }}</h1>
+        <p class="lead">Listado de Reservas</p>
+    </div>
    
 </div>
-<div>
-    <div data-ng-show="isBusy">PROCESANDO....</div>
-</div>
-<div class="col-md-12 row">
-    <table class="table">
-        <tr>
-          
-            <th ng-hide="true">Id</th>
-            <th>Codigo de Reserva</th>
-            <th>Fecha Reserva</th>
-            <th>Cliente</th>
-            <th>Vendedor</th>
-            <th ng-hide="true">Costo</th>
-            <th>Precio de Venta</th>
-            <th>Ciudad</th>
-            <th>Pais</th>
-            
-        </tr>
-        <tr data-ng-repeat="res in reservasList.reservas | orderBy:'Id'">
+<div class="container">
+    <div>
+        <div data-ng-show="isBusy">PROCESANDO....</div>
+    </div>
+    <div class="col-md-12 row">
+        <table class="table">
+            <tr>
 
-            <th ng-hide="true">{{res.Id }}</th>
-            <th>{{res.CodigoReserva }}</th>
-            <th>{{res.FechaReserva }}</th>
-            <th>{{res.Cliente.Nombre+' '+res.Cliente.Apellido }}</th>
-            <th>{{res.Vendedor.Nombre }}</th>
-            <th ng-hide="true">{{res.Costo }}</th>
-            <th>{{res.PrecioVenta }}</th>
-            <th>{{res.IdCiudad }}</th>
-            <th>{{res.IdPais }}</th>
-            <th><a  ng-click="reservasList.delete(res)" class="btn btn-primary">Cancelar</a></th>
-            
-        </tr>
-    </table>
-   
+                <th ng-hide="true">Id</th>
+                <th>Codigo de Reserva</th>
+                <th>Fecha Reserva</th>
+                <th>Cliente</th>
+                <th>Vendedor</th>
+                <th ng-hide="true">Costo</th>
+                <th>Precio de Venta</th>
+                <th>Ciudad</th>
+                <th>Pais</th>
+
+            </tr>
+            <tr data-ng-repeat="res in reservasList.reservas | orderBy:'Id'">
+                <th ng-hide="true">{{res.Id }}</th>
+                <th>{{res.CodigoReserva }}</th>
+                <th>{{res.FechaReserva }}</th>
+                <th>{{res.Cliente.Nombre+' '+res.Cliente.Apellido }}</th>
+                <th>{{res.Vendedor.Nombre }}</th>
+                <th ng-hide="true">{{res.Costo }}</th>
+                <th>{{res.PrecioVenta }}</th>
+                <th>{{res.IdCiudad }}</th>
+                <th>{{res.IdPais }}</th>
+                <th><a ng-click="reservasList.delete(res)" class="btn btn-primary">Cancelar</a></th>
+
+            </tr>
+        </table>
+
+    </div>
 </div>
 

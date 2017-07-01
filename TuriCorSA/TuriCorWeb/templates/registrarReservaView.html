@@ -1,89 +1,94 @@
-﻿    <div class="jumbotron">
+﻿<div class="jumbotron">
+    <div class="container">
         <h1>{{ registrarReserva.title }}</h1>
         <p class="lead">Registrar Reserva</p>
     </div>
-    <form name="formnuevareserva">
-        <div class="row col-md-6">
-            <div class="form-group">
-                <label for="idCliente">Id del Cliente</label>
-                <input required ng-model="registrarReserva.nuevaReserva.IdCliente" type="text" class="form-control" id="idCliente" placeholder="idCliente">
-                <button type="button" class="btn btn-default" ng-click="registrarReserva.buscarCliente(registrarReserva.nuevaReserva.IdCliente)">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
+</div>
+<div class="container">
+    <form class="form" name="formnuevareserva">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="idCliente">Id del Cliente</label>
+                    <input required ng-model="registrarReserva.nuevaReserva.IdCliente" type="text" class="form-control" id="idCliente" placeholder="idCliente">
+                    <button type="button" class="btn btn-default" ng-click="registrarReserva.buscarCliente(registrarReserva.nuevaReserva.IdCliente)">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
 
-            </div>
-            <div class="form-group">
-                <label for="apeynom">Apellido y Nombre</label>
-                <input required ng-model="registrarReserva.nuevaReserva.ApellidoNombreCliente" type="text" class="form-control" id="apeynom" placeholder="Apellido y Nombre" readonly>
-            </div>
-            <div class="form-group">
-                <label for="fechaDev">Fecha Devolucion</label>
-                <input required ng-model="registrarReserva.nuevaReserva.FechaHoraDevolucion" type="text" class="form-control" id="fechaDev" placeholder="Fecha Devolucion" readonly>
-            </div>
+                </div>
+                <div class="form-group">
+                    <label for="apeynom">Apellido y Nombre</label>
+                    <input required ng-model="registrarReserva.nuevaReserva.ApellidoNombreCliente" type="text" class="form-control" id="apeynom" placeholder="Apellido y Nombre" readonly>
+                </div>
 
-            <div class="form-group">
-                <label for="fechaRet">Fecha Retiro</label>
-                <input required ng-model="registrarReserva.nuevaReserva.FechaHoraRetiro" type="text" class="form-control" id="fechaRet" placeholder="Fecha Retiro" readonly>
-            </div>
-            <div class="form-group">
-                <label for="idVehiCiu">Id Vehiculo Ciudad</label>
-                <input required ng-model="registrarReserva.nuevaReserva.IdVehiculoCiudad" type="text" class="form-control" id="idVehiCiu" placeholder="Id Vehiculo Ciudad" readonly>
-            </div>
+                <div class="form-group">
+                    <label for="fechaRet">Fecha Retiro</label>
+                    <input required ng-model="registrarReserva.nuevaReserva.FechaHoraRetiro" type="text" class="form-control" id="fechaRet" placeholder="Fecha Retiro" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="fechaDev">Fecha Devolucion</label>
+                    <input required ng-model="registrarReserva.nuevaReserva.FechaHoraDevolucion" type="text" class="form-control" id="fechaDev" placeholder="Fecha Devolucion" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="idVehiCiu">Id Vehiculo Ciudad</label>
+                    <input required ng-model="registrarReserva.nuevaReserva.IdVehiculoCiudad" type="text" class="form-control" id="idVehiCiu" placeholder="Id Vehiculo Ciudad" readonly>
+                </div>
 
-            <div class="form-group">
-                <label for="lugarDev">Lugar de Devolucion</label>
-                <select class="form-control" id="lugarDev">
-                    <option disabled selected>Seleccione...</option>
-                    <option ng-repeat="lugar in registrarReserva.LugaresRetiroDevolucion" ng-click="registrarReserva.selectDevolucion(lugar.Nombre)">{{lugar.Nombre}}</option>
-                </select>
+                <div class="form-group">
+                    <label for="lugarDev">Lugar de Devolucion</label>
+                    <select class="form-control" id="lugarDev">
+                        <option disabled selected>Seleccione...</option>
+                        <option ng-repeat="lugar in registrarReserva.LugaresRetiroDevolucion" ng-click="registrarReserva.selectDevolucion(lugar.Nombre)">{{lugar.Nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="LugarRet">Lugar de Retiro</label>
+                    <select class="form-control" id="LugarRet">
+                        <option disabled selected>Seleccione...</option>
+                        <option ng-repeat="lugar in registrarReserva.LugaresRetiroDevolucion" ng-click="registrarReserva.selectRetiro(lugar.Nombre)">{{lugar.Nombre}}</option>
+                    </select>
+
+                </div>
             </div>
-            <div class="form-group">
-                <label for="LugarRet">Lugar de Retiro</label>
-                <select class="form-control" id="LugarRet">
-                    <option disabled selected>Seleccione...</option>
-                    <option ng-repeat="lugar in registrarReserva.LugaresRetiroDevolucion" ng-click="registrarReserva.selectRetiro(lugar.Nombre)">{{lugar.Nombre}}</option>
-                </select>
-                
-            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="idVendedor">Id de Vendedor</label>
+                    <input required ng-model="registrarReserva.nuevaReserva.IdVendedor" type="text" class="form-control" id="idVendedor" placeholder="idVendedor">
+                </div>
+                <div class="form-group">
+                    <label for="DNI">DNI Cliente</label>
+                    <input required ng-model="registrarReserva.nuevaReserva.NroDocumentoCliente" type="text" class="form-control" id="DNI" placeholder="DNI Cliente" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="fecRes">Fecha de Reserva</label>
+                    <input required ng-model="registrarReserva.nuevaReserva.FechaReserva" type="text" class="form-control" id="fecRes" placeholder="Fecha de Reserva" readonly>
+                </div>
 
 
-            
+                <div class="form-group">
+                    <label for="idCiudad">Id Ciudad</label>
+                    <input required ng-model="registrarReserva.nuevaReserva.IdCiudad" type="text" class="form-control" id="idCiudad" placeholder="idCiudad" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="idPais">Id Pais</label>
+                    <input required ng-model="registrarReserva.nuevaReserva.IdPais" type="text" class="form-control" id="idPais" placeholder="idPais" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="costo">Costo</label>
+                    <input required ng-model="registrarReserva.nuevaReserva.Costo" type="text" class="form-control" id="costo" placeholder="Costo" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="preVenta">Precio de venta</label>
+                    <input required ng-model="registrarReserva.nuevaReserva.PrecioVenta" type="text" class="form-control" id="preVenta" placeholder="Precio de venta" readonly>
+                </div>
+            </div>
         </div>
-        <div class="row col-md-6">
-            <div class="form-group">
-                <label for="idVendedor">Id de Vendedor</label>
-                <input required ng-model="registrarReserva.nuevaReserva.IdVendedor" type="text" class="form-control" id="idVendedor" placeholder="idVendedor">
-            </div>
-            <div class="form-group">
-                <label for="DNI">DNI Cliente</label>
-                <input required ng-model="registrarReserva.nuevaReserva.NroDocumentoCliente" type="text" class="form-control" id="DNI" placeholder="DNI Cliente" readonly>
-            </div>
-            <div class="form-group">
-                <label for="fecRes">Fecha de Reserva</label>
-                <input required ng-model="registrarReserva.nuevaReserva.FechaReserva" type="text" class="form-control" id="fecRes" placeholder="Fecha de Reserva" readonly>
-            </div>
-            
-            
-            <div class="form-group">
-                <label for="idCiudad">Id Ciudad</label>
-                <input required ng-model="registrarReserva.nuevaReserva.IdCiudad" type="text" class="form-control" id="idCiudad" placeholder="idCiudad" readonly>
-            </div>
-            <div class="form-group">
-                <label for="idPais">Id Pais</label>
-                <input required ng-model="registrarReserva.nuevaReserva.IdPais" type="text" class="form-control" id="idPais" placeholder="idPais" readonly>
-            </div>
-            <div class="form-group">
-                <label for="costo">Costo</label>
-                <input required ng-model="registrarReserva.nuevaReserva.Costo" type="text" class="form-control" id="costo" placeholder="Costo" readonly>
-            </div>
-            <div class="form-group">
-                <label for="preVenta">Precio de venta</label>
-                <input required ng-model="registrarReserva.nuevaReserva.PrecioVenta" type="text" class="form-control" id="preVenta" placeholder="Precio de venta" readonly>
-            </div>
-        </div>
-      
 
-        <div class="row"><button ng-click="registrarReserva.save()" type="button" class="btn btn-primary" ng-disabled="formnuevareserva.$invalid">Registrar Reserva</button></div>
+
+        <div class="row">
+            <div class="col-md-12"> <button ng-click="registrarReserva.save()" type="button" class="btn btn-primary" ng-disabled="formnuevareserva.$invalid">Registrar Reserva</button></div>
+        </div>
 
     </form>
+</div>
 
