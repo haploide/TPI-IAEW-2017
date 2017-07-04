@@ -83,7 +83,23 @@ app.controller('vehiculosController', function ($http, $scope, $location, reserv
             vehiculosController.isBusy = false;
 
         }, function (response) {
-            alert("Error");
+            switch (response.status) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
+
         }).then(function () {
 
         });
@@ -105,7 +121,22 @@ app.controller('vehiculosController', function ($http, $scope, $location, reserv
             vehiculosController.isBusy = false;
 
         }, function (response) {
-            alert("Error");
+            switch (response.status) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
         }).then(function () {
 
         });
@@ -123,7 +154,22 @@ app.controller('vehiculosController', function ($http, $scope, $location, reserv
         vehiculosController.isBusy = false;
 
     }, function (response) {
-        alert("Error");
+        switch (response.status) {
+            case 400:
+                alert("Bad Request");
+                break;
+            case 401:
+                alert("Unauthorized");
+                break;
+            case 404:
+                alert("Not Found");
+                break;
+            case 500:
+                alert("Internal Server Error");
+                break;
+            default:
+                alert("Error no identificado");
+        }
     }).then(function () {
 
     });
@@ -166,7 +212,22 @@ app.controller('reservasController', function ($http, $scope) {
             alert('Exito');
             reservasController.buscarReservas();
         }, function (response) {
-            alert("Error");
+            switch (response.status) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
         }).then(function () {
 
         });
@@ -199,7 +260,22 @@ app.controller('reservasController', function ($http, $scope) {
 
                 });
             }, function (response) {
-                alert("Error");
+                switch (response.status) {
+                    case 400:
+                        alert("Bad Request");
+                        break;
+                    case 401:
+                        alert("Unauthorized");
+                        break;
+                    case 404:
+                        alert("Not Found");
+                        break;
+                    case 500:
+                        alert("Internal Server Error");
+                        break;
+                    default:
+                        alert("Error no identificado");
+                }
             }).then(function () {
 
             });
@@ -218,7 +294,22 @@ app.controller('reservasController', function ($http, $scope) {
 
                 });
             }, function (response) {
-                alert("Error");
+                switch (response.status) {
+                    case 400:
+                        alert("Bad Request");
+                        break;
+                    case 401:
+                        alert("Unauthorized");
+                        break;
+                    case 404:
+                        alert("Not Found");
+                        break;
+                    case 500:
+                        alert("Internal Server Error");
+                        break;
+                    default:
+                        alert("Error no identificado");
+                }
             }).then(function () {
 
             });
@@ -226,7 +317,22 @@ app.controller('reservasController', function ($http, $scope) {
             reservasController.isBusy = false;
 
         }, function (response) {
-            alert("Error");
+            switch (response.status) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
         }).then(function () {
 
         });
@@ -257,7 +363,22 @@ app.controller('nuevareservasController', function ($http, $scope, reserva) {
             reserva.NroDocumentoCliente = response.data.NroDocumento;
 
         }, function (response) {
-            alert("Error");
+            switch (response.status) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
         }).then(function () {
 
         });
@@ -281,7 +402,22 @@ app.controller('nuevareservasController', function ($http, $scope, reserva) {
             window.location.href = "#!/listarreservas";
 
         }, function (response) {
-            alert("Error");
+            switch (response.status) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
         }).then(function () {
 
         });
