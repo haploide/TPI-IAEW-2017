@@ -65,20 +65,22 @@ app.controller('vehiculosController', function ($http, $scope, $location, reserv
                 'Accept': "application/json"
             }
         }).then(function (response) {
-            angular.copy(response.data.VehiculosEncontrados, vehiculosController.vehiculos);
-            $.each(vehiculosController.vehiculos, function () {
-                if (this.TieneAireAcon) {
-                    this.TieneAireAcon = 'Si';
-                } else {
-                    this.TieneAireAcon = 'No';
-                }
-                if (this.TieneDireccion) {
-                    this.TieneDireccion = 'Si';
-                } else {
-                    this.TieneDireccion = 'No';
-                }
-                this.CiudadId = $('#cmbCiudad option:selected').text();
-            });
+            if (response.status === 200) {
+                angular.copy(response.data.VehiculosEncontrados, vehiculosController.vehiculos);
+                $.each(vehiculosController.vehiculos, function () {
+                    if (this.TieneAireAcon) {
+                        this.TieneAireAcon = 'Si';
+                    } else {
+                        this.TieneAireAcon = 'No';
+                    }
+                    if (this.TieneDireccion) {
+                        this.TieneDireccion = 'Si';
+                    } else {
+                        this.TieneDireccion = 'No';
+                    }
+                    this.CiudadId = $('#cmbCiudad option:selected').text();
+                });
+            }
 
             vehiculosController.isBusy = false;
 
@@ -117,7 +119,9 @@ app.controller('vehiculosController', function ($http, $scope, $location, reserv
                 'Accept': "application/json"
             }
         }).then(function (response) {
-            angular.copy(response.data.Ciudades, vehiculosController.ciudades);
+            if (response.status === 200) {
+                angular.copy(response.data.Ciudades, vehiculosController.ciudades);
+            }
             vehiculosController.isBusy = false;
 
         }, function (response) {
@@ -150,7 +154,9 @@ app.controller('vehiculosController', function ($http, $scope, $location, reserv
             'Accept': "application/json"
         }
     }).then(function (response) {
-        angular.copy(response.data.Paises, vehiculosController.paises);
+        if (response.status === 200) {
+            angular.copy(response.data.Paises, vehiculosController.paises);
+        }
         vehiculosController.isBusy = false;
 
     }, function (response) {
@@ -208,9 +214,11 @@ app.controller('reservasController', function ($http, $scope) {
                 'Accept': "application/json"
             }
         }).then(function (response) {
-            // $window.location = "#/clientes";
-            alert('Exito');
-            reservasController.buscarReservas();
+            if (response.status === 200) {
+                // $window.location = "#/clientes";
+                alert('Reserva Eliminada');
+                reservasController.buscarReservas();
+            }
         }, function (response) {
             switch (response.status) {
                 case 400:
@@ -243,76 +251,82 @@ app.controller('reservasController', function ($http, $scope) {
                 'Accept': "application/json"
             }
         }).then(function (response) {
-            angular.copy(response.data, reservasController.reservas);
+            if (response.status === 200) {
+                angular.copy(response.data, reservasController.reservas);
 
-            $http({
-                method: 'GET',
+                $http({
+                    method: 'GET',
 
-                url: 'http://localhost:2253/api/pais?id=' + reservasController.reservas[0].IdPais,
-                headers: {
-                    'Accept': "application/json"
-                }
-            }).then(function (response) {
-                angular.copy(response.data, reservasController.paises);
-                $.each(reservasController.reservas, function () {
+                    url: 'http://localhost:2253/api/pais?id=' + reservasController.reservas[0].IdPais,
+                    headers: {
+                        'Accept': "application/json"
+                    }
+                }).then(function (response) {
+                    if (response.status === 200) {
+                        angular.copy(response.data, reservasController.paises);
+                        $.each(reservasController.reservas, function () {
 
-                    this.IdPais = reservasController.paises.Nombre;
+                            this.IdPais = reservasController.paises.Nombre;
 
-                });
-            }, function (response) {
-                switch (response.status) {
-                    case 400:
-                        alert("Bad Request");
-                        break;
-                    case 401:
-                        alert("Unauthorized");
-                        break;
-                    case 404:
-                        alert("Not Found");
-                        break;
-                    case 500:
-                        alert("Internal Server Error");
-                        break;
-                    default:
-                        alert("Error no identificado");
-                }
-            }).then(function () {
-
-            });
-            $http({
-                method: 'GET',
-
-                url: 'http://localhost:2253/api/ciudad?idCiudad=' + reservasController.reservas[0].IdCiudad + '&idPais=' + reservasController.reservas[0].IdPais,
-                headers: {
-                    'Accept': "application/json"
-                }
-            }).then(function (response) {
-                angular.copy(response.data, reservasController.ciudad);
-                $.each(reservasController.reservas, function () {
-
-                    this.IdCiudad = reservasController.ciudad.Nombre;
+                        });
+                    }
+                }, function (response) {
+                    switch (response.status) {
+                        case 400:
+                            alert("Bad Request");
+                            break;
+                        case 401:
+                            alert("Unauthorized");
+                            break;
+                        case 404:
+                            alert("Not Found");
+                            break;
+                        case 500:
+                            alert("Internal Server Error");
+                            break;
+                        default:
+                            alert("Error no identificado");
+                    }
+                }).then(function () {
 
                 });
-            }, function (response) {
-                switch (response.status) {
-                    case 400:
-                        alert("Bad Request");
-                        break;
-                    case 401:
-                        alert("Unauthorized");
-                        break;
-                    case 404:
-                        alert("Not Found");
-                        break;
-                    case 500:
-                        alert("Internal Server Error");
-                        break;
-                    default:
-                        alert("Error no identificado");
-                }
-            }).then(function () {
+                $http({
+                    method: 'GET',
 
-            });
+                    url: 'http://localhost:2253/api/ciudad?idCiudad=' + reservasController.reservas[0].IdCiudad + '&idPais=' + reservasController.reservas[0].IdPais,
+                    headers: {
+                        'Accept': "application/json"
+                    }
+                }).then(function (response) {
+                    if (response.status === 200) {
+                        angular.copy(response.data, reservasController.ciudad);
+                        $.each(reservasController.reservas, function () {
+
+                            this.IdCiudad = reservasController.ciudad.Nombre;
+
+                        });
+                    }
+                }, function (response) {
+                    switch (response.status) {
+                        case 400:
+                            alert("Bad Request");
+                            break;
+                        case 401:
+                            alert("Unauthorized");
+                            break;
+                        case 404:
+                            alert("Not Found");
+                            break;
+                        case 500:
+                            alert("Internal Server Error");
+                            break;
+                        default:
+                            alert("Error no identificado");
+                    }
+                }).then(function () {
+
+                });
+            }
 
             reservasController.isBusy = false;
 
@@ -349,7 +363,7 @@ app.controller('nuevareservasController', function ($http, $scope, reserva) {
 
 
     nuevareservasController.buscarCliente = function (id) {
-
+        nuevareservasController.isBusy = true;
         $http({
             method: 'GET',
             url: 'http://localhost:2253/api/Cliente?id=' + id,
@@ -359,8 +373,11 @@ app.controller('nuevareservasController', function ($http, $scope, reserva) {
             }
         }).then(function (response) {
 
-            reserva.ApellidoNombreCliente = response.data.Nombre + ' ' + response.data.Apellido;
-            reserva.NroDocumentoCliente = response.data.NroDocumento;
+            if (response.status === 200) {
+                reserva.ApellidoNombreCliente = response.data.Nombre + ' ' + response.data.Apellido;
+                reserva.NroDocumentoCliente = response.data.NroDocumento;
+            }
+            nuevareservasController.isBusy = false;
 
         }, function (response) {
             switch (response.status) {
@@ -398,8 +415,10 @@ app.controller('nuevareservasController', function ($http, $scope, reserva) {
                 'Accept': "application/json"
             }
         }).then(function (response) {
-            alert('Reserva Registrada');
-            window.location.href = "#!/listarreservas";
+            if (response.status === 201) {
+                alert('Reserva Registrada');
+                window.location.href = "#!/listarreservas";
+            }
 
         }, function (response) {
             switch (response.status) {

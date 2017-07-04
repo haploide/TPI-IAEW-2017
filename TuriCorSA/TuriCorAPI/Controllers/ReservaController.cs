@@ -14,7 +14,7 @@ using System.Data.Entity.Core;
 
 namespace TuriCorAPI.Controllers
 {
-   //[EnableCors(origins: "http://localhost:8660", headers: "*", methods: "*")]
+    //[EnableCors(origins: "http://localhost:8660", headers: "*", methods: "*")]
     //[Scope("read")]
     public class ReservaController : ApiController
     {
@@ -104,43 +104,43 @@ namespace TuriCorAPI.Controllers
                 });
 
 
-                Reserva reser= new Reserva()
-            {
-                CodigoReserva = reserva.Reserva.CodigoReserva,
-                //CodigoReserva = "EUVMH",
-                FechaReserva = res.FechaReserva, 
-                IdCliente= res.IdCliente,
-                IdVendedor= res.IdVendedor,
-                Costo= res.Costo,
-                PrecioVenta=res.PrecioVenta,
-                IdVehiculoCiudad=res.IdVehiculoCiudad,
-                IdCiudad= res.IdCiudad, 
-                IdPais = res.IdPais
+                Reserva reser = new Reserva()
+                {
+                    CodigoReserva = reserva.Reserva.CodigoReserva,
+                    //CodigoReserva = "EUVMH",
+                    FechaReserva = res.FechaReserva,
+                    IdCliente = res.IdCliente,
+                    IdVendedor = res.IdVendedor,
+                    Costo = res.Costo,
+                    PrecioVenta = res.PrecioVenta,
+                    IdVehiculoCiudad = res.IdVehiculoCiudad,
+                    IdCiudad = res.IdCiudad,
+                    IdPais = res.IdPais
 
 
-            };
+                };
 
-            if (_db.Reserva == null || !_db.Reserva.Any())
-            {
-               return NotFound();
-            }
-            if (res == null)
-            {
-                return BadRequest();
-            }
+                if (_db.Reserva == null || !_db.Reserva.Any())
+                {
+                    return NotFound();
+                }
+                if (res == null)
+                {
+                    return BadRequest();
+                }
 
-            _db.Reserva.Add(reser);
+                _db.Reserva.Add(reser);
 
-            _db.SaveChanges();
-                
+                _db.SaveChanges();
 
-            return Created("api/Reserva/" + reser.Id, reser);
+
+                return Created("api/Reserva/" + reser.Id, reser);
 
             }
             catch (Exception ex)
             {
 
-            return InternalServerError(ex);
+                return InternalServerError(ex);
             }
         }
 
@@ -189,16 +189,16 @@ namespace TuriCorAPI.Controllers
                     return NotFound();
                 }
                 var cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
-                        
+
                 _db.Reserva.Remove(res);
 
                 _db.SaveChanges();
 
                 var reserva = cliente.CancelarReserva(new ServiceReferenceReservaVehiculos.CancelarReservaRequest()
                 {
-                    CodigoReserva = res.CodigoReserva 
+                    CodigoReserva = res.CodigoReserva
                 });
-                
+
                 return Ok(res);
 
             }
