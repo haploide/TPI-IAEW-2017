@@ -438,7 +438,7 @@ namespace TuriCorWeb.Controllers
                 var data = Encoding.ASCII.GetBytes(postData);
 
                 req.Method = "POST";
-                req.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(Credencial.cliente.Id+":"+Credencial.cliente.Secret)));
+                //req.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(Credencial.cliente.Id+":"+Credencial.cliente.Secret)));
                 req.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
                 req.ContentLength = data.Length;
 
@@ -480,7 +480,7 @@ namespace TuriCorWeb.Controllers
                 throw;
             }
 
-             return View();
+            return RedirectToAction("Index", "Home");
         }
         
         protected override void Dispose(bool disposing)

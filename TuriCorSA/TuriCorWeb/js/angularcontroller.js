@@ -51,6 +51,7 @@ app.controller('vehiculosController', function ($http, $scope, $location, reserv
         $location.url('/nuevareserva');
 
     }
+    
     vehiculosController.seleccionarCiudad = function (id) {
         vehiculosController.ciudadSeleccionada = id;
     };
@@ -62,7 +63,8 @@ app.controller('vehiculosController', function ($http, $scope, $location, reserv
             method: 'GET',
             url: 'http://localhost:2253/api/vehiculo?Id=' + vehiculosController.ciudadSeleccionada + '&fechaHoraRetiro=' + $scope.fechaHasta + '&fechaHoraDevolucion=' + $scope.fechaDesde,
             headers: {
-                'Accept': "application/json"
+                'Accept': "application/json",
+                'Authorization': 'Bearer ' + sessionStorage.token
             }
         }).then(function (response) {
             if (response.status === 200) {
@@ -116,7 +118,8 @@ app.controller('vehiculosController', function ($http, $scope, $location, reserv
             url: 'http://localhost:2253/api/ciudad?id=' + pais.Id,
 
             headers: {
-                'Accept': "application/json"
+                'Accept': "application/json",
+                'Authorization': 'Bearer ' + sessionStorage.token
             }
         }).then(function (response) {
             if (response.status === 200) {
@@ -151,7 +154,8 @@ app.controller('vehiculosController', function ($http, $scope, $location, reserv
         method: 'GET',
         url: 'http://localhost:2253/api/pais',
         headers: {
-            'Accept': "application/json"
+            'Accept': "application/json",
+            'Authorization': 'Bearer ' + sessionStorage.token
         }
     }).then(function (response) {
         if (response.status === 200) {
@@ -211,7 +215,8 @@ app.controller('reservasController', function ($http, $scope) {
             url: 'http://localhost:2253/api/reserva/' + res.Id,
 
             headers: {
-                'Accept': "application/json"
+                'Accept': "application/json",
+                'Authorization': 'Bearer ' + sessionStorage.token
             }
         }).then(function (response) {
             if (response.status === 200) {
@@ -248,7 +253,8 @@ app.controller('reservasController', function ($http, $scope) {
             url: 'http://localhost:2253/api/Reserva',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': "application/json"
+                'Accept': "application/json",
+                'Authorization': 'Bearer ' + sessionStorage.token
             }
         }).then(function (response) {
             if (response.status === 200) {
@@ -259,7 +265,8 @@ app.controller('reservasController', function ($http, $scope) {
 
                     url: 'http://localhost:2253/api/pais?id=' + reservasController.reservas[0].IdPais,
                     headers: {
-                        'Accept': "application/json"
+                        'Accept': "application/json",
+                        'Authorization': 'Bearer ' + sessionStorage.token
                     }
                 }).then(function (response) {
                     if (response.status === 200) {
@@ -295,7 +302,8 @@ app.controller('reservasController', function ($http, $scope) {
 
                     url: 'http://localhost:2253/api/ciudad?idCiudad=' + reservasController.reservas[0].IdCiudad + '&idPais=' + reservasController.reservas[0].IdPais,
                     headers: {
-                        'Accept': "application/json"
+                        'Accept': "application/json",
+                        'Authorization': 'Bearer ' + sessionStorage.token
                     }
                 }).then(function (response) {
                     if (response.status === 200) {

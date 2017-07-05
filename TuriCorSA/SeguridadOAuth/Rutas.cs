@@ -8,7 +8,7 @@ namespace SeguridadOAuth
 {
     public static class Rutas
     {
-        public const string AuthorizationServerBaseAddress = "http://104.197.29.243:8080";
+        public const string AuthorizationServerBaseAddress = "http://130.211.183.120:8080";
 
         public const string ResourceServerBaseAddress = "http://localhost:2253/";
 

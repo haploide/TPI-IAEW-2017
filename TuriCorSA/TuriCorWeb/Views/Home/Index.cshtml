@@ -1,9 +1,39 @@
-﻿@{
-    ViewBag.Title = "TuriCor";
+﻿@using TuriCorWeb.Models
+@{
+    var token = Session["Token"] as Token;
+
+    if (token == null)
+    {
+        token = new Token();
+    }
 }
+
+@{
+    ViewBag.Title = "TuriCor";
+    
+}
+
+
 @section scripts{
+    <script>
+        $( function(){
+
+            var access_token = "@token.access_token";
+
+            if (access_token!="") {
+                if (typeof (Storage) !== "undefined") {
+                    sessionStorage.setItem("token","@token.access_token");
+
+                }
+            }
+        });
+
+</script>
     <script src="~/js/angularcontroller.js"></script>
+    
 }
 
 <div data-ng-view=""></div>
-
+<script>
+    
+</script>
