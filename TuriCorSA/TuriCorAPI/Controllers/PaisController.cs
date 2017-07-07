@@ -9,10 +9,11 @@ using AuthorizationServer.App_Start;
 
 namespace TuriCorAPI.Controllers
 {
-    
-    [Scope("read")]
+    [Authorize]
+    //[Scope("read")]
     public class PaisController : ApiController
     {
+        
         public IHttpActionResult Get()
         {
             try
